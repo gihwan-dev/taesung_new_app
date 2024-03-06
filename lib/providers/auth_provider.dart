@@ -1,6 +1,9 @@
+import 'package:dio/dio.dart';
+import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:taesung_app/models/auth_model.dart';
 import 'package:taesung_app/providers/dio_provider.dart';
+import 'package:taesung_app/providers/secure_storage_provider.dart';
 
 part 'auth_provider.g.dart';
 
@@ -13,6 +16,7 @@ class Auth extends _$Auth {
       email: '',
       password: '',
       confirmPassword: '',
+      signUpStatus: SignUpStatus.initial,
     );
   }
 
@@ -35,11 +39,11 @@ class Auth extends _$Auth {
 
   void reset() {
     state = const AsyncValue.data(AuthModel(
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    ));
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        signUpStatus: SignUpStatus.initial));
   }
 
   bool signInIsValid() =>
@@ -69,31 +73,53 @@ class Auth extends _$Auth {
   Future<void> signIn() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      print(state.value);
-      if (!signInIsValid()) {
-        throw '유효하지 않은 입력 양식 입니다. 이메일 또는 패스워드를 확인해 주세요.';
+      try {
+        if (!signInIsValid()) {
+          throw '유효하지 않은 입력 양식 입니다. 이메일 또는 패스워드를 확인해 주세요.';
+        }
+        final response = await ref
+            .read(publicDioProvider)
+            .post('/auth', data: state.value!.toJson());
+        if (response.statusCode == 201) {
+          await ref
+              .read(tokenProvider.notifier)
+              .save(response.data['access_token']);
+          return Future(() => state.value!.copyWith());
+        }
+        // TODO: go router provider 사용해서 페이지 이동 로직 작성하기
+        throw "알 수 없는 에러가 발생했습니다.";
+      } on DioException catch (e) {
+        throw e.response?.data['message'] ?? '알 수 없는 에러가 발생했습니다.';
+      } catch (e) {
+        rethrow;
       }
-      final response = await ref
-          .read(publicDioProvider)
-          .post('/auth', data: state.value!.toJson());
-      print(response);
-      if (response.statusCode == 200) {}
-      return Future(() => state.value!.copyWith());
     });
   }
 
-  Future<void> signUp() async {
+  Future<bool> signUp() async {
     state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() async {
-      if (!signUpIsValid()) {
-        throw "유효하지 않은 입력 양식 입니다.";
-      }
-      final response = await ref
-          .read(publicDioProvider)
-          .post('/user', data: state.value!.toJson());
-
-      print(response.statusCode);
-      return Future(() => state.value!.copyWith());
-    });
+    bool isSuccess = false;
+    state = await AsyncValue.guard(
+      () async {
+        try {
+          if (!signUpIsValid()) {
+            throw "유효하지 않은 입력 양식 입니다.";
+          }
+          final response = await ref
+              .read(publicDioProvider)
+              .post('/user', data: state.value!.toJson());
+          if (response.statusCode == 201) {
+            isSuccess = true;
+          }
+          return Future(
+              () => state.value!.copyWith(signUpStatus: SignUpStatus.success));
+        } on DioException catch (e) {
+          throw e.response?.data['message'] ?? '알 수 없는 에러가 발생했습니다.';
+        } catch (e) {
+          rethrow;
+        }
+      },
+    );
+    return isSuccess;
   }
 }

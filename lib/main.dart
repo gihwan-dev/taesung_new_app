@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taesung_app/consts/color_const.dart';
-import 'package:taesung_app/pages/main/main_page.dart';
-import 'package:taesung_app/pages/auth/sign_in_page.dart';
-import 'package:taesung_app/providers/secure_storage_provider.dart';
+import 'package:taesung_app/providers/router_provider.dart';
 
 void main() {
   runApp(
@@ -18,27 +16,13 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final token = ref.watch(tokenProvider);
-    print(token);
-    return MaterialApp(
+    final routeState = ref.watch(goRouterProvider);
+    return MaterialApp.router(
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: primaryBlue),
         useMaterial3: true,
       ),
-      home: token.when(
-        data: (token) => token == null ? const SignInPage() : const MainPage(),
-        error: (err, st) => Column(
-          children: [
-            Text(
-              'Error: $err',
-              style: const TextStyle(color: Colors.red),
-            ),
-          ],
-        ),
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
+      routerConfig: routeState,
     );
   }
 }
