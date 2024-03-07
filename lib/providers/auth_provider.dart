@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:taesung_app/models/auth_model.dart';
 import 'package:taesung_app/providers/dio_provider.dart';
@@ -74,6 +73,7 @@ class Auth extends _$Auth {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       try {
+        print(signInIsValid());
         if (!signInIsValid()) {
           throw '유효하지 않은 입력 양식 입니다. 이메일 또는 패스워드를 확인해 주세요.';
         }
@@ -84,10 +84,9 @@ class Auth extends _$Auth {
           await ref
               .read(tokenProvider.notifier)
               .save(response.data['access_token']);
-          return Future(() => state.value!.copyWith());
+          return Future(() => AuthModel.empty());
         }
-        // TODO: go router provider 사용해서 페이지 이동 로직 작성하기
-        throw "알 수 없는 에러가 발생했습니다.";
+        throw "로그인에 실패했습니다. 다시 시도해 주세요.";
       } on DioException catch (e) {
         throw e.response?.data['message'] ?? '알 수 없는 에러가 발생했습니다.';
       } catch (e) {
