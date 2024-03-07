@@ -24,6 +24,7 @@ mixin _$AuthModel {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get confirmPassword => throw _privateConstructorUsedError;
+  SignUpStatus get signUpStatus => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,11 @@ abstract class $AuthModelCopyWith<$Res> {
       _$AuthModelCopyWithImpl<$Res, AuthModel>;
   @useResult
   $Res call(
-      {String name, String email, String password, String confirmPassword});
+      {String name,
+      String email,
+      String password,
+      String confirmPassword,
+      SignUpStatus signUpStatus});
 }
 
 /// @nodoc
@@ -57,6 +62,7 @@ class _$AuthModelCopyWithImpl<$Res, $Val extends AuthModel>
     Object? email = null,
     Object? password = null,
     Object? confirmPassword = null,
+    Object? signUpStatus = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -75,6 +81,10 @@ class _$AuthModelCopyWithImpl<$Res, $Val extends AuthModel>
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
               as String,
+      signUpStatus: null == signUpStatus
+          ? _value.signUpStatus
+          : signUpStatus // ignore: cast_nullable_to_non_nullable
+              as SignUpStatus,
     ) as $Val);
   }
 }
@@ -88,7 +98,11 @@ abstract class _$$AuthModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name, String email, String password, String confirmPassword});
+      {String name,
+      String email,
+      String password,
+      String confirmPassword,
+      SignUpStatus signUpStatus});
 }
 
 /// @nodoc
@@ -106,6 +120,7 @@ class __$$AuthModelImplCopyWithImpl<$Res>
     Object? email = null,
     Object? password = null,
     Object? confirmPassword = null,
+    Object? signUpStatus = null,
   }) {
     return _then(_$AuthModelImpl(
       name: null == name
@@ -124,6 +139,10 @@ class __$$AuthModelImplCopyWithImpl<$Res>
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
               as String,
+      signUpStatus: null == signUpStatus
+          ? _value.signUpStatus
+          : signUpStatus // ignore: cast_nullable_to_non_nullable
+              as SignUpStatus,
     ));
   }
 }
@@ -135,7 +154,8 @@ class _$AuthModelImpl with DiagnosticableTreeMixin implements _AuthModel {
       {required this.name,
       required this.email,
       required this.password,
-      required this.confirmPassword});
+      required this.confirmPassword,
+      required this.signUpStatus});
 
   factory _$AuthModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthModelImplFromJson(json);
@@ -148,10 +168,12 @@ class _$AuthModelImpl with DiagnosticableTreeMixin implements _AuthModel {
   final String password;
   @override
   final String confirmPassword;
+  @override
+  final SignUpStatus signUpStatus;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AuthModel(name: $name, email: $email, password: $password, confirmPassword: $confirmPassword)';
+    return 'AuthModel(name: $name, email: $email, password: $password, confirmPassword: $confirmPassword, signUpStatus: $signUpStatus)';
   }
 
   @override
@@ -162,7 +184,8 @@ class _$AuthModelImpl with DiagnosticableTreeMixin implements _AuthModel {
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('password', password))
-      ..add(DiagnosticsProperty('confirmPassword', confirmPassword));
+      ..add(DiagnosticsProperty('confirmPassword', confirmPassword))
+      ..add(DiagnosticsProperty('signUpStatus', signUpStatus));
   }
 
   @override
@@ -175,13 +198,15 @@ class _$AuthModelImpl with DiagnosticableTreeMixin implements _AuthModel {
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.confirmPassword, confirmPassword) ||
-                other.confirmPassword == confirmPassword));
+                other.confirmPassword == confirmPassword) &&
+            (identical(other.signUpStatus, signUpStatus) ||
+                other.signUpStatus == signUpStatus));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, email, password, confirmPassword);
+  int get hashCode => Object.hash(
+      runtimeType, name, email, password, confirmPassword, signUpStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -202,7 +227,8 @@ abstract class _AuthModel implements AuthModel {
       {required final String name,
       required final String email,
       required final String password,
-      required final String confirmPassword}) = _$AuthModelImpl;
+      required final String confirmPassword,
+      required final SignUpStatus signUpStatus}) = _$AuthModelImpl;
 
   factory _AuthModel.fromJson(Map<String, dynamic> json) =
       _$AuthModelImpl.fromJson;
@@ -215,6 +241,8 @@ abstract class _AuthModel implements AuthModel {
   String get password;
   @override
   String get confirmPassword;
+  @override
+  SignUpStatus get signUpStatus;
   @override
   @JsonKey(ignore: true)
   _$$AuthModelImplCopyWith<_$AuthModelImpl> get copyWith =>

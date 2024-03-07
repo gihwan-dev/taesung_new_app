@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'secure_storage_provider.dart';
+part of 'router_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tokenHash() => r'a5d199322ed5fb7d1c4540317b90180cce406467';
+String _$goRouterHash() => r'361530785f64d2ef12e6934958ad223d7eaae722';
 
-/// See also [Token].
-@ProviderFor(Token)
-final tokenProvider = AutoDisposeAsyncNotifierProvider<Token, String?>.internal(
-  Token.new,
-  name: r'tokenProvider',
+/// See also [goRouter].
+@ProviderFor(goRouter)
+final goRouterProvider = AutoDisposeProvider<GoRouter>.internal(
+  goRouter,
+  name: r'goRouterProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$tokenHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$goRouterHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$Token = AutoDisposeAsyncNotifier<String?>;
+typedef GoRouterRef = AutoDisposeProviderRef<GoRouter>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

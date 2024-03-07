@@ -11,6 +11,7 @@ class AuthModel with _$AuthModel {
     required String email,
     required String password,
     required String confirmPassword,
+    required SignUpStatus signUpStatus,
   }) = _AuthModel;
 
   factory AuthModel.fromJson(Map<String, dynamic> json) =>
@@ -21,5 +22,12 @@ class AuthModel with _$AuthModel {
         email: '',
         password: '',
         confirmPassword: '',
+        signUpStatus: SignUpStatus.initial,
       );
+}
+
+enum SignUpStatus {
+  initial,
+  success,
+  fail,
 }

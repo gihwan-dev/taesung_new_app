@@ -77,7 +77,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
               const Logo(),
               const SizedBox(height: 50),
               Text(
-                'Error: $err',
+                'Error: ${err.toString()}',
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.red),
               ),

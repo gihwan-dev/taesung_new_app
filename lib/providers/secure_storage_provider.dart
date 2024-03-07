@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'secure_storage_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class Token extends _$Token {
   final FlutterSecureStorage _flutterSecureStorage =
       const FlutterSecureStorage();
@@ -15,9 +15,14 @@ class Token extends _$Token {
 
   Future<void> save(String token) async {
     state = const AsyncValue.loading();
-    await _flutterSecureStorage.write(key: 'token', value: token);
-    state = AsyncValue.data(token);
+    state = await AsyncValue.guard(() async {
+      await _flutterSecureStorage.write(key: 'token', value: token);
+      return _flutterSecureStorage.read(key: 'token');
+    });
   }
 
-  Future<void> delete() => _flutterSecureStorage.delete(key: 'token');
+  Future<void> delete() async {
+    await _flutterSecureStorage.delete(key: 'token');
+    state = const AsyncValue.data(null);
+  }
 }
