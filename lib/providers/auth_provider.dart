@@ -73,7 +73,6 @@ class Auth extends _$Auth {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       try {
-        print(signInIsValid());
         if (!signInIsValid()) {
           throw '유효하지 않은 입력 양식 입니다. 이메일 또는 패스워드를 확인해 주세요.';
         }
