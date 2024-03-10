@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taesung_app/features/device/widgets/device_item.dart';
 import 'package:taesung_app/features/device/widgets/user_name.dart';
 import 'package:taesung_app/providers/device_info_provider.dart';
+import 'package:taesung_app/providers/router_provider.dart';
 
 class HomeMainPage extends ConsumerStatefulWidget {
   const HomeMainPage({
@@ -16,7 +17,8 @@ class HomeMainPage extends ConsumerStatefulWidget {
 class _HomeMainPageState extends ConsumerState<HomeMainPage> {
   @override
   Widget build(BuildContext context) {
-    final deviceInfoList = ref.watch(deviceInfoProvider);
+    final deviceInfoListState = ref.watch(deviceInfoProvider);
+    final goRouterState = ref.watch(goRouterProvider);
 
     return SafeArea(
       child: Padding(
@@ -26,18 +28,38 @@ class _HomeMainPageState extends ConsumerState<HomeMainPage> {
           children: [
             const UserName(),
             const SizedBox(height: 20),
-            Expanded(
-              child: ListView.separated(
-                scrollDirection: Axis.vertical,
-                separatorBuilder: (context, index) =>
-                    (const SizedBox(height: 20)),
-                itemCount: deviceInfoList.length,
-                itemBuilder: (context, index) => DeviceItem(
-                  diIdx: deviceInfoList[index].diIdx,
-                  diName: deviceInfoList[index].diName,
-                  diNickname: deviceInfoList[index].diNickname,
+            deviceInfoListState.when(
+              skipLoadingOnRefresh: false,
+              data: (deviceInfoList) => Expanded(
+                child: RefreshIndicator(
+                  onRefresh: () async => ref.invalidate(deviceInfoProvider),
+                  child: ListView.separated(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    separatorBuilder: (context, index) =>
+                        (const SizedBox(height: 20)),
+                    itemCount: deviceInfoList.length,
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        goRouterState.push('/device',
+                            extra: deviceInfoList[index]);
+                      },
+                      child: DeviceItem(
+                        diIdx: deviceInfoList[index].diIdx,
+                        diName: deviceInfoList[index].diName,
+                        diNickname: deviceInfoList[index].diNickname,
+                      ),
+                    ),
+                  ),
                 ),
-                shrinkWrap: true,
+              ),
+              error: (er, st) => Center(
+                  child: Text(
+                'Error: $er',
+                style: const TextStyle(color: Colors.red),
+              )),
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
               ),
             ),
           ],

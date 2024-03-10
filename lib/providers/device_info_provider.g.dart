@@ -6,12 +6,12 @@ part of 'device_info_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$deviceInfoHash() => r'729d38f8ebe179e3ea9210a9981259e356ac9586';
+String _$deviceInfoHash() => r'38e3f43fca4035296a085a446bf65cfd0b953c81';
 
 /// See also [DeviceInfo].
 @ProviderFor(DeviceInfo)
-final deviceInfoProvider =
-    AutoDisposeNotifierProvider<DeviceInfo, List<DeviceInfoModel>>.internal(
+final deviceInfoProvider = AutoDisposeAsyncNotifierProvider<DeviceInfo,
+    List<DeviceInfoModel>>.internal(
   DeviceInfo.new,
   name: r'deviceInfoProvider',
   debugGetCreateSourceHash:
@@ -20,6 +20,6 @@ final deviceInfoProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$DeviceInfo = AutoDisposeNotifier<List<DeviceInfoModel>>;
+typedef _$DeviceInfo = AutoDisposeAsyncNotifier<List<DeviceInfoModel>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
