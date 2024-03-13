@@ -35,6 +35,7 @@ mixin _$DeviceStateModel {
   @JsonKey(name: 'mod_date')
   String get modeDate => throw _privateConstructorUsedError;
   bool get hasError => throw _privateConstructorUsedError;
+  DeviceEmitStatus get emitStatus => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,7 +57,8 @@ abstract class $DeviceStateModelCopyWith<$Res> {
       @JsonKey(name: 'ds_collect') int dsCollect,
       @JsonKey(name: 'ds_remoteCollect') int dsRemoteCollect,
       @JsonKey(name: 'mod_date') String modeDate,
-      bool hasError});
+      bool hasError,
+      DeviceEmitStatus emitStatus});
 }
 
 /// @nodoc
@@ -80,6 +82,7 @@ class _$DeviceStateModelCopyWithImpl<$Res, $Val extends DeviceStateModel>
     Object? dsRemoteCollect = null,
     Object? modeDate = null,
     Object? hasError = null,
+    Object? emitStatus = null,
   }) {
     return _then(_value.copyWith(
       dsIdx: null == dsIdx
@@ -114,6 +117,10 @@ class _$DeviceStateModelCopyWithImpl<$Res, $Val extends DeviceStateModel>
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
+      emitStatus: null == emitStatus
+          ? _value.emitStatus
+          : emitStatus // ignore: cast_nullable_to_non_nullable
+              as DeviceEmitStatus,
     ) as $Val);
   }
 }
@@ -134,7 +141,8 @@ abstract class _$$DeviceStateModelImplCopyWith<$Res>
       @JsonKey(name: 'ds_collect') int dsCollect,
       @JsonKey(name: 'ds_remoteCollect') int dsRemoteCollect,
       @JsonKey(name: 'mod_date') String modeDate,
-      bool hasError});
+      bool hasError,
+      DeviceEmitStatus emitStatus});
 }
 
 /// @nodoc
@@ -156,6 +164,7 @@ class __$$DeviceStateModelImplCopyWithImpl<$Res>
     Object? dsRemoteCollect = null,
     Object? modeDate = null,
     Object? hasError = null,
+    Object? emitStatus = null,
   }) {
     return _then(_$DeviceStateModelImpl(
       dsIdx: null == dsIdx
@@ -190,6 +199,10 @@ class __$$DeviceStateModelImplCopyWithImpl<$Res>
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
+      emitStatus: null == emitStatus
+          ? _value.emitStatus
+          : emitStatus // ignore: cast_nullable_to_non_nullable
+              as DeviceEmitStatus,
     ));
   }
 }
@@ -207,7 +220,8 @@ class _$DeviceStateModelImpl
       @JsonKey(name: 'ds_collect') required this.dsCollect,
       @JsonKey(name: 'ds_remoteCollect') required this.dsRemoteCollect,
       @JsonKey(name: 'mod_date') required this.modeDate,
-      this.hasError = false});
+      this.hasError = false,
+      this.emitStatus = DeviceEmitStatus.initial});
 
   factory _$DeviceStateModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DeviceStateModelImplFromJson(json);
@@ -236,10 +250,13 @@ class _$DeviceStateModelImpl
   @override
   @JsonKey()
   final bool hasError;
+  @override
+  @JsonKey()
+  final DeviceEmitStatus emitStatus;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DeviceStateModel(dsIdx: $dsIdx, diIdx: $diIdx, dsDoor: $dsDoor, dsBat: $dsBat, dsCollect: $dsCollect, dsRemoteCollect: $dsRemoteCollect, modeDate: $modeDate, hasError: $hasError)';
+    return 'DeviceStateModel(dsIdx: $dsIdx, diIdx: $diIdx, dsDoor: $dsDoor, dsBat: $dsBat, dsCollect: $dsCollect, dsRemoteCollect: $dsRemoteCollect, modeDate: $modeDate, hasError: $hasError, emitStatus: $emitStatus)';
   }
 
   @override
@@ -254,7 +271,8 @@ class _$DeviceStateModelImpl
       ..add(DiagnosticsProperty('dsCollect', dsCollect))
       ..add(DiagnosticsProperty('dsRemoteCollect', dsRemoteCollect))
       ..add(DiagnosticsProperty('modeDate', modeDate))
-      ..add(DiagnosticsProperty('hasError', hasError));
+      ..add(DiagnosticsProperty('hasError', hasError))
+      ..add(DiagnosticsProperty('emitStatus', emitStatus));
   }
 
   @override
@@ -273,13 +291,15 @@ class _$DeviceStateModelImpl
             (identical(other.modeDate, modeDate) ||
                 other.modeDate == modeDate) &&
             (identical(other.hasError, hasError) ||
-                other.hasError == hasError));
+                other.hasError == hasError) &&
+            (identical(other.emitStatus, emitStatus) ||
+                other.emitStatus == emitStatus));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, dsIdx, diIdx, dsDoor, dsBat,
-      dsCollect, dsRemoteCollect, modeDate, hasError);
+      dsCollect, dsRemoteCollect, modeDate, hasError, emitStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -305,7 +325,8 @@ abstract class _DeviceStateModel implements DeviceStateModel {
       @JsonKey(name: 'ds_collect') required final int dsCollect,
       @JsonKey(name: 'ds_remoteCollect') required final int dsRemoteCollect,
       @JsonKey(name: 'mod_date') required final String modeDate,
-      final bool hasError}) = _$DeviceStateModelImpl;
+      final bool hasError,
+      final DeviceEmitStatus emitStatus}) = _$DeviceStateModelImpl;
 
   factory _DeviceStateModel.fromJson(Map<String, dynamic> json) =
       _$DeviceStateModelImpl.fromJson;
@@ -333,6 +354,8 @@ abstract class _DeviceStateModel implements DeviceStateModel {
   String get modeDate;
   @override
   bool get hasError;
+  @override
+  DeviceEmitStatus get emitStatus;
   @override
   @JsonKey(ignore: true)
   _$$DeviceStateModelImplCopyWith<_$DeviceStateModelImpl> get copyWith =>

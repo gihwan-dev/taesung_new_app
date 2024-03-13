@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:taesung_app/features/device/utils/icon_utils.dart';
 
 class DeviceBatContainer extends StatelessWidget {

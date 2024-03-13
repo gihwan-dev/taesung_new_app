@@ -8,24 +8,34 @@ part 'collect_code_provider.g.dart';
 @riverpod
 class CollectCode extends _$CollectCode {
   @override
-  FutureOr<CollectCodeModel> build(int ccIdx) {
-    return getCollectCode(ccIdx);
+  FutureOr<List<CollectCodeModel>> build() {
+    return getCollectCode();
   }
 
-  Future<CollectCodeModel> getCollectCode(int ccIdx) async {
+  Future<List<CollectCodeModel>> getCollectCode() async {
     final token = ref.watch(tokenProvider);
-    final response = await ref
-        .read(privateDioProvider(token.value!))
-        .get('/collect-code/$ccIdx');
-    print('collect code $ccIdx response: ${response.data}');
-    return CollectCodeModel.fromJson(response.data);
+    final response =
+        await ref.read(privateDioProvider(token.value!)).get('/collect-code');
+    print('collect code response: ${response.data}');
+    return [
+      for (final collectCode in response.data)
+        CollectCodeModel.fromJson(collectCode)
+    ];
   }
 
   Future<void> fetchCollectCode(int ccIdx) async {
     state = const AsyncValue.loading();
 
     state = await AsyncValue.guard(() async {
-      return getCollectCode(ccIdx);
+      return getCollectCode();
     });
+  }
+
+  String getCollectCodeName(int ccIdx) {
+    final collectCode = state.value?.firstWhere(
+      (collectCode) => collectCode.ccIdx == ccIdx,
+      orElse: () => CollectCodeModel.empty(),
+    );
+    return collectCode!.ccName;
   }
 }

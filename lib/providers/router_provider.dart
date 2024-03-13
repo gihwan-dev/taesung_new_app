@@ -14,7 +14,8 @@ GoRouter goRouter(GoRouterRef ref) {
       GoRoute(path: '/', builder: (context, state) => const RootPage()),
       GoRoute(path: '/signIn', builder: (context, state) => const SignInPage()),
       GoRoute(path: '/signUp', builder: (context, state) => const SignUpPage()),
-      GoRoute(path: '/device', builder: (context, state) => const DevicePage()),
+      GoRoute(
+          path: '/device/:id', builder: (context, state) => const DevicePage()),
     ],
   );
 }

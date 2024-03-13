@@ -15,6 +15,7 @@ class DeviceStateModel with _$DeviceStateModel {
     @JsonKey(name: 'ds_remoteCollect') required int dsRemoteCollect,
     @JsonKey(name: 'mod_date') required String modeDate,
     @Default(false) bool hasError,
+    @Default(DeviceEmitStatus.initial) DeviceEmitStatus emitStatus,
   }) = _DeviceStateModel;
 
   factory DeviceStateModel.fromJson(Map<String, dynamic> json) =>
@@ -32,4 +33,10 @@ class DeviceStateModel with _$DeviceStateModel {
       hasError: false,
     );
   }
+}
+
+enum DeviceEmitStatus {
+  initial,
+  isLoading,
+  isSuccess,
 }

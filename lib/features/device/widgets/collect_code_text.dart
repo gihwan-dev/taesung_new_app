@@ -12,10 +12,10 @@ class CollectCodeText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final collectCodeState = ref.watch(collectCodeProvider(ccIdx));
+    final collectCodeState = ref.watch(collectCodeProvider);
     return collectCodeState.when(
       data: (collectCode) => Text(
-        collectCode.ccName,
+        ref.read(collectCodeProvider.notifier).getCollectCodeName(ccIdx),
         style: TextStyle(
           color: getCollectCodeColor(ccIdx: ccIdx),
           fontWeight: FontWeight.w600,

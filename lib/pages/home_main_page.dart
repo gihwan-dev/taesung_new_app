@@ -41,7 +41,8 @@ class _HomeMainPageState extends ConsumerState<HomeMainPage> {
                     itemCount: deviceInfoList.length,
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
-                        goRouterState.push('/device',
+                        goRouterState.push(
+                            '/device/${deviceInfoList[index].diIdx}',
                             extra: deviceInfoList[index]);
                       },
                       child: DeviceItem(

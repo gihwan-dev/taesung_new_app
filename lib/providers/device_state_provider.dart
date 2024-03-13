@@ -1,7 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:taesung_app/models/device_state_model.dart';
-import 'package:taesung_app/providers/collect_code_provider.dart';
 import 'package:taesung_app/providers/web_socket_provider.dart';
 
 part 'device_state_provider.g.dart';
@@ -13,10 +12,18 @@ class DeviceState extends _$DeviceState {
 
   @override
   DeviceStateModel build(int diIdx) {
+    ref.onDispose(() {
+      print('deviceState onDispose $diIdx');
+      ref
+          .watch(webSocketProvider(_deviceStateNameSpace))
+          .off(_deviceStateNameSpace);
+    });
+
     ref.watch(webSocketProvider(_deviceStateNameSpace)).onConnect((data) {
       print('deviceState webSocket connected $diIdx');
-      emitFindOneDeviceState(diIdx);
     });
+
+    emitFindOneDeviceState(diIdx);
 
     ref
         .watch(webSocketProvider(_deviceStateNameSpace))
@@ -37,13 +44,12 @@ class DeviceState extends _$DeviceState {
         .watch(webSocketProvider(_deviceStateNameSpace))
         .on(_deviceStateEventName, (data) {
       if (data == null) {
-        state = DeviceStateModel.empty();
         return;
       } else {
         print('deviceState findOneDeviceState: $data');
         if (data['di_idx'] != state.diIdx) return;
-        state = DeviceStateModel.fromJson(data);
-        ref.invalidate(collectCodeProvider(data['ds_collect']));
+        state = DeviceStateModel.fromJson(data)
+            .copyWith(emitStatus: DeviceEmitStatus.isSuccess);
       }
     });
   }
@@ -52,5 +58,19 @@ class DeviceState extends _$DeviceState {
     ref
         .watch(webSocketProvider(_deviceStateNameSpace))
         .emit(_deviceStateEventName, diIdx);
+  }
+
+  void emitStartCollect({required int diIdx}) {
+    state = state.copyWith(emitStatus: DeviceEmitStatus.isLoading);
+    ref
+        .watch(webSocketProvider(_deviceStateNameSpace))
+        .emit('startCollect', diIdx);
+  }
+
+  void emitResetCollect({required int diIdx}) {
+    state = state.copyWith(emitStatus: DeviceEmitStatus.isLoading);
+    ref
+        .watch(webSocketProvider(_deviceStateNameSpace))
+        .emit('resetCollect', diIdx);
   }
 }

@@ -12,11 +12,19 @@ class SensorData extends _$SensorData {
 
   @override
   SensorDataModel build(int diIdx) {
+    ref.onDispose(() {
+      print('sensorData onDispose $diIdx');
+      ref
+          .watch(webSocketProvider(_sensorDataNameSpace))
+          .off(_sensorDataNameSpace);
+    });
+
     listenFindOneEvent();
+
+    emitFindOneSensorData(diIdx);
 
     ref.watch(webSocketProvider(_sensorDataNameSpace)).onConnect((data) {
       print('sensorData webSocket connected $diIdx');
-      emitFindOneSensorData(diIdx);
     });
     return SensorDataModel.empty().copyWith(diIdx: diIdx);
   }
@@ -35,6 +43,7 @@ class SensorData extends _$SensorData {
   }
 
   void emitFindOneSensorData(int diIdx) {
+    print('sensorData emitFindOneSensorData diIdx: $diIdx');
     ref
         .watch(webSocketProvider(_sensorDataNameSpace))
         .emit(_sensorDataEventName, diIdx);

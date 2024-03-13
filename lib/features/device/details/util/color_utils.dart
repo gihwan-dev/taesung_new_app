@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 Color getOdorLevelColor({int? value = 6}) {
   switch (value) {
+    case 0:
+      return const Color.fromRGBO(0, 164, 16, 100);
     case 1:
       return const Color.fromRGBO(0, 164, 16, 100);
     case 2:

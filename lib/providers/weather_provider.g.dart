@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'device_state_provider.dart';
+part of 'weather_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$deviceStateHash() => r'47c1c2e1cf6ff3e82ddd26a2be882697eb52a54f';
+String _$weatherHash() => r'f43701a5fb4a4fb8a7dc216ccccb3fd7624481f6';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,36 +29,35 @@ class _SystemHash {
   }
 }
 
-abstract class _$DeviceState
-    extends BuildlessAutoDisposeNotifier<DeviceStateModel> {
+abstract class _$Weather extends BuildlessAutoDisposeNotifier<WeatherModel> {
   late final int diIdx;
 
-  DeviceStateModel build(
+  WeatherModel build(
     int diIdx,
   );
 }
 
-/// See also [DeviceState].
-@ProviderFor(DeviceState)
-const deviceStateProvider = DeviceStateFamily();
+/// See also [Weather].
+@ProviderFor(Weather)
+const weatherProvider = WeatherFamily();
 
-/// See also [DeviceState].
-class DeviceStateFamily extends Family<DeviceStateModel> {
-  /// See also [DeviceState].
-  const DeviceStateFamily();
+/// See also [Weather].
+class WeatherFamily extends Family<WeatherModel> {
+  /// See also [Weather].
+  const WeatherFamily();
 
-  /// See also [DeviceState].
-  DeviceStateProvider call(
+  /// See also [Weather].
+  WeatherProvider call(
     int diIdx,
   ) {
-    return DeviceStateProvider(
+    return WeatherProvider(
       diIdx,
     );
   }
 
   @override
-  DeviceStateProvider getProviderOverride(
-    covariant DeviceStateProvider provider,
+  WeatherProvider getProviderOverride(
+    covariant WeatherProvider provider,
   ) {
     return call(
       provider.diIdx,
@@ -77,30 +76,29 @@ class DeviceStateFamily extends Family<DeviceStateModel> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'deviceStateProvider';
+  String? get name => r'weatherProvider';
 }
 
-/// See also [DeviceState].
-class DeviceStateProvider
-    extends AutoDisposeNotifierProviderImpl<DeviceState, DeviceStateModel> {
-  /// See also [DeviceState].
-  DeviceStateProvider(
+/// See also [Weather].
+class WeatherProvider
+    extends AutoDisposeNotifierProviderImpl<Weather, WeatherModel> {
+  /// See also [Weather].
+  WeatherProvider(
     int diIdx,
   ) : this._internal(
-          () => DeviceState()..diIdx = diIdx,
-          from: deviceStateProvider,
-          name: r'deviceStateProvider',
+          () => Weather()..diIdx = diIdx,
+          from: weatherProvider,
+          name: r'weatherProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$deviceStateHash,
-          dependencies: DeviceStateFamily._dependencies,
-          allTransitiveDependencies:
-              DeviceStateFamily._allTransitiveDependencies,
+                  : _$weatherHash,
+          dependencies: WeatherFamily._dependencies,
+          allTransitiveDependencies: WeatherFamily._allTransitiveDependencies,
           diIdx: diIdx,
         );
 
-  DeviceStateProvider._internal(
+  WeatherProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -113,8 +111,8 @@ class DeviceStateProvider
   final int diIdx;
 
   @override
-  DeviceStateModel runNotifierBuild(
-    covariant DeviceState notifier,
+  WeatherModel runNotifierBuild(
+    covariant Weather notifier,
   ) {
     return notifier.build(
       diIdx,
@@ -122,10 +120,10 @@ class DeviceStateProvider
   }
 
   @override
-  Override overrideWith(DeviceState Function() create) {
+  Override overrideWith(Weather Function() create) {
     return ProviderOverride(
       origin: this,
-      override: DeviceStateProvider._internal(
+      override: WeatherProvider._internal(
         () => create()..diIdx = diIdx,
         from: from,
         name: null,
@@ -138,14 +136,13 @@ class DeviceStateProvider
   }
 
   @override
-  AutoDisposeNotifierProviderElement<DeviceState, DeviceStateModel>
-      createElement() {
-    return _DeviceStateProviderElement(this);
+  AutoDisposeNotifierProviderElement<Weather, WeatherModel> createElement() {
+    return _WeatherProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is DeviceStateProvider && other.diIdx == diIdx;
+    return other is WeatherProvider && other.diIdx == diIdx;
   }
 
   @override
@@ -157,18 +154,18 @@ class DeviceStateProvider
   }
 }
 
-mixin DeviceStateRef on AutoDisposeNotifierProviderRef<DeviceStateModel> {
+mixin WeatherRef on AutoDisposeNotifierProviderRef<WeatherModel> {
   /// The parameter `diIdx` of this provider.
   int get diIdx;
 }
 
-class _DeviceStateProviderElement
-    extends AutoDisposeNotifierProviderElement<DeviceState, DeviceStateModel>
-    with DeviceStateRef {
-  _DeviceStateProviderElement(super.provider);
+class _WeatherProviderElement
+    extends AutoDisposeNotifierProviderElement<Weather, WeatherModel>
+    with WeatherRef {
+  _WeatherProviderElement(super.provider);
 
   @override
-  int get diIdx => (origin as DeviceStateProvider).diIdx;
+  int get diIdx => (origin as WeatherProvider).diIdx;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

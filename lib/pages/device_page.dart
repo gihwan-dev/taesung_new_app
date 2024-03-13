@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:taesung_app/features/device/details/widgets/device_collect_tab_view.dart';
-import 'package:taesung_app/features/device/details/widgets/device_data_tab_view.dart';
-import 'package:taesung_app/features/device/details/widgets/device_main_tab_view.dart';
-import 'package:taesung_app/features/device/details/widgets/device_state_tab_view.dart';
-import 'package:taesung_app/models/device_info_model.dart';
+import 'package:taesung_app/features/device/details/widgets/collect/device_collect_tab_view.dart';
+import 'package:taesung_app/features/device/details/widgets/data/device_data_tab_view.dart';
+import 'package:taesung_app/features/device/details/widgets/main/device_main_tab_view.dart';
+import 'package:taesung_app/features/device/details/widgets/device/device_state_tab_view.dart';
 import 'package:taesung_app/widgets/device_select_menu.dart';
 
 class DevicePage extends ConsumerWidget {
@@ -13,7 +11,6 @@ class DevicePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final deviceInfo = GoRouterState.of(context).extra! as DeviceInfoModel;
     return DefaultTabController(
       length: 4,
       initialIndex: 0,

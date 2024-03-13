@@ -17,6 +17,9 @@ _$DeviceStateModelImpl _$$DeviceStateModelImplFromJson(
       dsRemoteCollect: json['ds_remoteCollect'] as int,
       modeDate: json['mod_date'] as String,
       hasError: json['hasError'] as bool? ?? false,
+      emitStatus:
+          $enumDecodeNullable(_$DeviceEmitStatusEnumMap, json['emitStatus']) ??
+              DeviceEmitStatus.initial,
     );
 
 Map<String, dynamic> _$$DeviceStateModelImplToJson(
@@ -30,4 +33,11 @@ Map<String, dynamic> _$$DeviceStateModelImplToJson(
       'ds_remoteCollect': instance.dsRemoteCollect,
       'mod_date': instance.modeDate,
       'hasError': instance.hasError,
+      'emitStatus': _$DeviceEmitStatusEnumMap[instance.emitStatus]!,
     };
+
+const _$DeviceEmitStatusEnumMap = {
+  DeviceEmitStatus.initial: 'initial',
+  DeviceEmitStatus.isLoading: 'isLoading',
+  DeviceEmitStatus.isSuccess: 'isSuccess',
+};
