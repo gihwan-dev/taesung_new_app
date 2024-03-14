@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taesung_app/models/auth_model.dart';
-import 'package:taesung_app/pages/auth/sign_up_screen.dart';
-import 'package:taesung_app/pages/auth/sign_up_success_screen.dart';
+import 'package:taesung_app/features/auth/widgets/sign_up_screen.dart';
+import 'package:taesung_app/features/auth/widgets/sign_up_success_screen.dart';
 import 'package:taesung_app/providers/auth_provider.dart';
 import 'package:taesung_app/widgets/logo.dart';
 

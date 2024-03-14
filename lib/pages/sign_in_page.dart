@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:taesung_app/pages/auth/sign_in_button.dart';
+import 'package:taesung_app/features/auth/widgets/sign_in_button.dart';
 import 'package:taesung_app/providers/auth_provider.dart';
 import 'package:taesung_app/widgets/auth_navigator_buttons.dart';
 import 'package:taesung_app/widgets/logo.dart';
