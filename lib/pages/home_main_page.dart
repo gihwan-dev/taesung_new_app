@@ -39,17 +39,8 @@ class _HomeMainPageState extends ConsumerState<HomeMainPage> {
                     separatorBuilder: (context, index) =>
                         (const SizedBox(height: 20)),
                     itemCount: deviceInfoList.length,
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        goRouterState.push(
-                            '/device/${deviceInfoList[index].diIdx}',
-                            extra: deviceInfoList[index]);
-                      },
-                      child: DeviceItem(
-                        diIdx: deviceInfoList[index].diIdx,
-                        diName: deviceInfoList[index].diName,
-                        diNickname: deviceInfoList[index].diNickname,
-                      ),
+                    itemBuilder: (context, index) => DeviceItem(
+                      deviceInfo: deviceInfoList[index],
                     ),
                   ),
                 ),
