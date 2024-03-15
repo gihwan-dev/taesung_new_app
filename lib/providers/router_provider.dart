@@ -1,8 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:taesung_app/features/setting/features/account/widgets/account_setting_page.dart';
-import 'package:taesung_app/features/setting/features/alarm/widgets/alarm_setting_page.dart';
-import 'package:taesung_app/features/setting/features/collect/widgets/collect_setting_page.dart';
+import 'package:taesung_app/pages/account_setting_page.dart';
+import 'package:taesung_app/pages/alarm_setting_page.dart';
+import 'package:taesung_app/pages/collect_setting_page.dart';
+import 'package:taesung_app/pages/device_alram_setting_page.dart';
 import 'package:taesung_app/pages/device_page.dart';
 import 'package:taesung_app/pages/sign_in_page.dart';
 import 'package:taesung_app/pages/sign_up_page.dart';
@@ -14,11 +15,22 @@ part 'router_provider.g.dart';
 GoRouter goRouter(GoRouterRef ref) {
   return GoRouter(
     routes: <GoRoute>[
-      GoRoute(path: '/', builder: (context, state) => const RootPage()),
-      GoRoute(path: '/signIn', builder: (context, state) => const SignInPage()),
-      GoRoute(path: '/signUp', builder: (context, state) => const SignUpPage()),
       GoRoute(
-          path: '/device/:id', builder: (context, state) => const DevicePage()),
+        path: '/',
+        builder: (context, state) => const RootPage(),
+      ),
+      GoRoute(
+        path: '/signIn',
+        builder: (context, state) => const SignInPage(),
+      ),
+      GoRoute(
+        path: '/signUp',
+        builder: (context, state) => const SignUpPage(),
+      ),
+      GoRoute(
+        path: '/device/:id',
+        builder: (context, state) => const DevicePage(),
+      ),
       GoRoute(
         path: '/setting/account',
         builder: (context, state) => const AccountSettingPage(),
@@ -30,6 +42,10 @@ GoRouter goRouter(GoRouterRef ref) {
       GoRoute(
         path: '/setting/alarm',
         builder: (context, state) => const AlarmSettingPage(),
+      ),
+      GoRoute(
+        path: '/setting/alarm/:id',
+        builder: (context, state) => const DeviceAlarmSettingPage(),
       ),
     ],
   );

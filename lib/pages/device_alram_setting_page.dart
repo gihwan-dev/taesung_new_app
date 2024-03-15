@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AlarmSettingPage extends StatelessWidget {
-  const AlarmSettingPage({super.key});
+class DeviceAlarmSettingPage extends StatelessWidget {
+  const DeviceAlarmSettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
