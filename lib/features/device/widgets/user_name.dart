@@ -18,7 +18,7 @@ class UserName extends ConsumerWidget {
         ),
       ),
       error: (e, st) => Text('Error: $e'),
-      loading: () => const CircularProgressIndicator(),
+      loading: () => const Text('...'),
     );
   }
 }

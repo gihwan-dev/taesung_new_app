@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taesung_app/features/device/widgets/device_item.dart';
 import 'package:taesung_app/features/device/widgets/user_name.dart';
 import 'package:taesung_app/providers/device_info_provider.dart';
-import 'package:taesung_app/providers/router_provider.dart';
 
 class HomeMainPage extends ConsumerStatefulWidget {
   const HomeMainPage({
@@ -18,7 +17,6 @@ class _HomeMainPageState extends ConsumerState<HomeMainPage> {
   @override
   Widget build(BuildContext context) {
     final deviceInfoListState = ref.watch(deviceInfoProvider);
-    final goRouterState = ref.watch(goRouterProvider);
 
     return SafeArea(
       child: Padding(
@@ -50,8 +48,26 @@ class _HomeMainPageState extends ConsumerState<HomeMainPage> {
                 'Error: $er',
                 style: const TextStyle(color: Colors.red),
               )),
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
+              loading: () => Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    width: double.infinity,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

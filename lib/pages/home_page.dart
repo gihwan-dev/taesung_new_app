@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _buildAppBar(currentIndex),
       body: _pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
@@ -36,7 +37,22 @@ class _HomePageState extends State<HomePage> {
               currentIndex = index;
             });
           },
-          items: bottomNavIconList(alarmAmount: 3)),
+          items: bottomNavIconList()),
     );
+  }
+
+  AppBar? _buildAppBar(int index) {
+    switch (index) {
+      case 2:
+        return AppBar(
+          title: const Text('알람 데이터'),
+        );
+      case 3:
+        return AppBar(
+          title: const Text('설정'),
+        );
+      default:
+        return null;
+    }
   }
 }
