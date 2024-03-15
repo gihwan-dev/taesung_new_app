@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-List<BottomNavigationBarItem> bottomNavIconList({required int alarmAmount}) {
+List<BottomNavigationBarItem> bottomNavIconList() {
   return [
     const BottomNavigationBarItem(
       icon: Icon(Icons.home),
@@ -10,11 +10,8 @@ List<BottomNavigationBarItem> bottomNavIconList({required int alarmAmount}) {
       icon: Icon(Icons.map),
       label: 'Map',
     ),
-    BottomNavigationBarItem(
-      icon: Badge(
-        label: Text('$alarmAmount'),
-        child: const Icon(Icons.notifications),
-      ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.notifications),
       label: 'Alarm',
     ),
     const BottomNavigationBarItem(

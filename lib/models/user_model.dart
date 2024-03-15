@@ -9,6 +9,7 @@ class UserModel with _$UserModel {
   const factory UserModel({
     required String email,
     @Default('Not has name') String? name,
+    @JsonKey(name: 'reg_date') required String regDate,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
