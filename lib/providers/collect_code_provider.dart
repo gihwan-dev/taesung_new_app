@@ -1,7 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:taesung_app/models/collect_code_model.dart';
 import 'package:taesung_app/providers/dio_provider.dart';
-import 'package:taesung_app/providers/secure_storage_provider.dart';
 
 part 'collect_code_provider.g.dart';
 
@@ -13,9 +12,7 @@ class CollectCode extends _$CollectCode {
   }
 
   Future<List<CollectCodeModel>> getCollectCode() async {
-    final token = ref.watch(tokenProvider);
-    final response =
-        await ref.read(privateDioProvider(token.value!)).get('/collect-code');
+    final response = await ref.watch(publicDioProvider).get('/collect-code');
     print('collect code response: ${response.data}');
     return [
       for (final collectCode in response.data)

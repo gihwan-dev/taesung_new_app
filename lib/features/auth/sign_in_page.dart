@@ -68,30 +68,32 @@ class _SignInPageState extends ConsumerState<SignInPage> {
           ),
         ),
       ),
-      error: (err, st) => Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Logo(),
-              const SizedBox(height: 50),
-              Text(
-                'Error: ${err.toString()}',
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.red),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  ref.invalidate(authProvider);
-                },
-                child: const Text('새로고침'),
-              ),
-            ],
+      error: (err, st) {
+        return Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Logo(),
+                const SizedBox(height: 50),
+                Text(
+                  'Error: ${err.toString()}',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.red),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    ref.invalidate(authProvider);
+                  },
+                  child: const Text('새로고침'),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
       loading: () => const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),

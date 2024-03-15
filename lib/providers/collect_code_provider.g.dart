@@ -6,7 +6,7 @@ part of 'collect_code_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$collectCodeHash() => r'1e1359564e5c9939b5f91c55296bdc14c95d7e07';
+String _$collectCodeHash() => r'406937c2252df467a9beeac3b369e6cbe60a71c3';
 
 /// See also [CollectCode].
 @ProviderFor(CollectCode)
