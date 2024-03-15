@@ -9,19 +9,29 @@ class RootPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final token = ref.watch(tokenProvider);
-    return token.when(
-      data: (token) => token == null ? const SignInPage() : const HomePage(),
-      error: (err, st) => Column(
-        children: [
-          Text(
-            'Error: $err',
-            style: const TextStyle(color: Colors.red),
-          ),
-        ],
+    final tokenState = ref.watch(tokenProvider);
+    return tokenState.when(
+      data: (token) {
+        if (token == null) {
+          return const SignInPage();
+        } else {
+          return const HomePage();
+        }
+      },
+      error: (err, st) => Scaffold(
+        body: Column(
+          children: [
+            Text(
+              'Error: $err',
+              style: const TextStyle(color: Colors.red),
+            ),
+          ],
+        ),
       ),
-      loading: () => const Center(
-        child: CircularProgressIndicator(),
+      loading: () => const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }
