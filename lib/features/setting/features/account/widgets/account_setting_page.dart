@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
+import 'package:taesung_app/features/setting/features/account/widgets/setting_sign_out_button.dart';
+import 'package:taesung_app/features/setting/features/account/widgets/setting_user_bio_container.dart';
 import 'package:taesung_app/providers/user_provider.dart';
 
 class AccountSettingPage extends ConsumerStatefulWidget {
@@ -26,51 +27,9 @@ class _AccountSettingPageState extends ConsumerState<AccountSettingPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('이름'),
-                    Text(
-                      user.name ?? '이름이 없습니다. 관리자에게 문의해 주세요.',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    const Text('이메일'),
-                    Text(
-                      user.email,
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 20),
-                    const Text('등록일자'),
-                    Text(
-                      DateFormat('yyyy-MM-dd')
-                          .format(DateTime.parse(user.regDate)),
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
+              SettingUserBioContainer(user: user),
               const Expanded(child: SizedBox()),
-              SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    '로그아웃',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              )
+              const SettingSignOutButton()
             ],
           ),
         ),
