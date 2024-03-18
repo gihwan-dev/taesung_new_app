@@ -18,6 +18,7 @@ class NotificationSettingContainer extends ConsumerWidget {
         ref.watch(notificationSettingProvider(diIdx: selectedDeviceInfo.diIdx));
 
     return notificationSettingState.when(
+      skipLoadingOnReload: true,
       data: (notificationSetting) {
         print('notificationSetting: $notificationSetting');
         return Expanded(
@@ -33,13 +34,33 @@ class NotificationSettingContainer extends ConsumerWidget {
                   height: 20,
                 ),
                 NotificationSwitch(
-                    title: '포집알림', value: notificationSetting.nsCollect),
+                  nsIdx: notificationSetting.nsIdx,
+                  diIdx: selectedDeviceInfo.diIdx,
+                  title: '포집알림',
+                  value: notificationSetting.nsCollect,
+                  type: NotificationPatchType.collect,
+                ),
                 NotificationSwitch(
-                    title: '복합악취 초과 알림', value: notificationSetting.nsOuOver),
+                  nsIdx: notificationSetting.nsIdx,
+                  diIdx: selectedDeviceInfo.diIdx,
+                  title: '복합악취 초과 알림',
+                  value: notificationSetting.nsOuOver,
+                  type: NotificationPatchType.ouOver,
+                ),
                 NotificationSwitch(
-                    title: '문열림 알림', value: notificationSetting.nsDoorOpen),
+                  nsIdx: notificationSetting.nsIdx,
+                  diIdx: selectedDeviceInfo.diIdx,
+                  title: '문열림 알림',
+                  value: notificationSetting.nsDoorOpen,
+                  type: NotificationPatchType.doorOpen,
+                ),
                 NotificationSwitch(
-                    title: '배터리 알림', value: notificationSetting.nsLowBattery),
+                  nsIdx: notificationSetting.nsIdx,
+                  diIdx: selectedDeviceInfo.diIdx,
+                  title: '배터리 알림',
+                  value: notificationSetting.nsLowBattery,
+                  type: NotificationPatchType.lowBattery,
+                ),
               ],
             ),
           ),

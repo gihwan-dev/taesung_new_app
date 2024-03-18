@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:taesung_app/pages/account_setting_page.dart';
 import 'package:taesung_app/pages/alarm_setting_page.dart';
+import 'package:taesung_app/pages/collect_setting_detail_page.dart';
 import 'package:taesung_app/pages/collect_setting_page.dart';
 import 'package:taesung_app/pages/device_alram_setting_page.dart';
 import 'package:taesung_app/pages/device_page.dart';
@@ -47,6 +48,10 @@ GoRouter goRouter(GoRouterRef ref) {
         path: '/setting/alarm/:id',
         builder: (context, state) => const DeviceAlarmSettingPage(),
       ),
+      GoRoute(
+        path: '/setting/collect/:id',
+        builder: (context, state) => const CollectSettingDetailPage(),
+      )
     ],
   );
 }
