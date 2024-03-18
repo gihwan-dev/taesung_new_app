@@ -6,7 +6,7 @@ part of 'alarm_setting_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$alarmSettingHash() => r'0b81a78f19b0dcb6defbaac9229ac97a240b75e0';
+String _$alarmSettingHash() => r'be94984fdca914429a7832f883fa886a8839d309';
 
 /// Copied from Dart SDK
 class _SystemHash {

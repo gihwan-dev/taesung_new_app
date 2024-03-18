@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'notification_setting_provider.dart';
+part of 'device_setting_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$notificationSettingHash() =>
-    r'c502e84e2d4ddae7dacac090339c0891508410bb';
+String _$deviceSettingHash() => r'5285fd806c532cfeede61124f31266c448c774ba';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,37 +29,36 @@ class _SystemHash {
   }
 }
 
-abstract class _$NotificationSetting
-    extends BuildlessAutoDisposeAsyncNotifier<NotificationSettingModel> {
+abstract class _$DeviceSetting
+    extends BuildlessAutoDisposeAsyncNotifier<DeviceSettingModel?> {
   late final int diIdx;
 
-  FutureOr<NotificationSettingModel> build({
+  FutureOr<DeviceSettingModel?> build({
     required int diIdx,
   });
 }
 
-/// See also [NotificationSetting].
-@ProviderFor(NotificationSetting)
-const notificationSettingProvider = NotificationSettingFamily();
+/// See also [DeviceSetting].
+@ProviderFor(DeviceSetting)
+const deviceSettingProvider = DeviceSettingFamily();
 
-/// See also [NotificationSetting].
-class NotificationSettingFamily
-    extends Family<AsyncValue<NotificationSettingModel>> {
-  /// See also [NotificationSetting].
-  const NotificationSettingFamily();
+/// See also [DeviceSetting].
+class DeviceSettingFamily extends Family<AsyncValue<DeviceSettingModel?>> {
+  /// See also [DeviceSetting].
+  const DeviceSettingFamily();
 
-  /// See also [NotificationSetting].
-  NotificationSettingProvider call({
+  /// See also [DeviceSetting].
+  DeviceSettingProvider call({
     required int diIdx,
   }) {
-    return NotificationSettingProvider(
+    return DeviceSettingProvider(
       diIdx: diIdx,
     );
   }
 
   @override
-  NotificationSettingProvider getProviderOverride(
-    covariant NotificationSettingProvider provider,
+  DeviceSettingProvider getProviderOverride(
+    covariant DeviceSettingProvider provider,
   ) {
     return call(
       diIdx: provider.diIdx,
@@ -79,30 +77,30 @@ class NotificationSettingFamily
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'notificationSettingProvider';
+  String? get name => r'deviceSettingProvider';
 }
 
-/// See also [NotificationSetting].
-class NotificationSettingProvider extends AutoDisposeAsyncNotifierProviderImpl<
-    NotificationSetting, NotificationSettingModel> {
-  /// See also [NotificationSetting].
-  NotificationSettingProvider({
+/// See also [DeviceSetting].
+class DeviceSettingProvider extends AutoDisposeAsyncNotifierProviderImpl<
+    DeviceSetting, DeviceSettingModel?> {
+  /// See also [DeviceSetting].
+  DeviceSettingProvider({
     required int diIdx,
   }) : this._internal(
-          () => NotificationSetting()..diIdx = diIdx,
-          from: notificationSettingProvider,
-          name: r'notificationSettingProvider',
+          () => DeviceSetting()..diIdx = diIdx,
+          from: deviceSettingProvider,
+          name: r'deviceSettingProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$notificationSettingHash,
-          dependencies: NotificationSettingFamily._dependencies,
+                  : _$deviceSettingHash,
+          dependencies: DeviceSettingFamily._dependencies,
           allTransitiveDependencies:
-              NotificationSettingFamily._allTransitiveDependencies,
+              DeviceSettingFamily._allTransitiveDependencies,
           diIdx: diIdx,
         );
 
-  NotificationSettingProvider._internal(
+  DeviceSettingProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -115,8 +113,8 @@ class NotificationSettingProvider extends AutoDisposeAsyncNotifierProviderImpl<
   final int diIdx;
 
   @override
-  FutureOr<NotificationSettingModel> runNotifierBuild(
-    covariant NotificationSetting notifier,
+  FutureOr<DeviceSettingModel?> runNotifierBuild(
+    covariant DeviceSetting notifier,
   ) {
     return notifier.build(
       diIdx: diIdx,
@@ -124,10 +122,10 @@ class NotificationSettingProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  Override overrideWith(NotificationSetting Function() create) {
+  Override overrideWith(DeviceSetting Function() create) {
     return ProviderOverride(
       origin: this,
-      override: NotificationSettingProvider._internal(
+      override: DeviceSettingProvider._internal(
         () => create()..diIdx = diIdx,
         from: from,
         name: null,
@@ -140,14 +138,14 @@ class NotificationSettingProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<NotificationSetting,
-      NotificationSettingModel> createElement() {
-    return _NotificationSettingProviderElement(this);
+  AutoDisposeAsyncNotifierProviderElement<DeviceSetting, DeviceSettingModel?>
+      createElement() {
+    return _DeviceSettingProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is NotificationSettingProvider && other.diIdx == diIdx;
+    return other is DeviceSettingProvider && other.diIdx == diIdx;
   }
 
   @override
@@ -159,19 +157,19 @@ class NotificationSettingProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 }
 
-mixin NotificationSettingRef
-    on AutoDisposeAsyncNotifierProviderRef<NotificationSettingModel> {
+mixin DeviceSettingRef
+    on AutoDisposeAsyncNotifierProviderRef<DeviceSettingModel?> {
   /// The parameter `diIdx` of this provider.
   int get diIdx;
 }
 
-class _NotificationSettingProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<NotificationSetting,
-        NotificationSettingModel> with NotificationSettingRef {
-  _NotificationSettingProviderElement(super.provider);
+class _DeviceSettingProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<DeviceSetting,
+        DeviceSettingModel?> with DeviceSettingRef {
+  _DeviceSettingProviderElement(super.provider);
 
   @override
-  int get diIdx => (origin as NotificationSettingProvider).diIdx;
+  int get diIdx => (origin as DeviceSettingProvider).diIdx;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
