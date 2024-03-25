@@ -24,6 +24,7 @@ mixin _$UserModel {
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'reg_date')
   String get regDate => throw _privateConstructorUsedError;
+  String? get token => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,10 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {String email, String? name, @JsonKey(name: 'reg_date') String regDate});
+      {String email,
+      String? name,
+      @JsonKey(name: 'reg_date') String regDate,
+      String? token});
 }
 
 /// @nodoc
@@ -56,6 +60,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? email = null,
     Object? name = freezed,
     Object? regDate = null,
+    Object? token = freezed,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -70,6 +75,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.regDate
           : regDate // ignore: cast_nullable_to_non_nullable
               as String,
+      token: freezed == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -83,7 +92,10 @@ abstract class _$$UserModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String email, String? name, @JsonKey(name: 'reg_date') String regDate});
+      {String email,
+      String? name,
+      @JsonKey(name: 'reg_date') String regDate,
+      String? token});
 }
 
 /// @nodoc
@@ -100,6 +112,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? email = null,
     Object? name = freezed,
     Object? regDate = null,
+    Object? token = freezed,
   }) {
     return _then(_$UserModelImpl(
       email: null == email
@@ -114,6 +127,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.regDate
           : regDate // ignore: cast_nullable_to_non_nullable
               as String,
+      token: freezed == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -124,7 +141,8 @@ class _$UserModelImpl with DiagnosticableTreeMixin implements _UserModel {
   const _$UserModelImpl(
       {required this.email,
       this.name = 'Not has name',
-      @JsonKey(name: 'reg_date') required this.regDate});
+      @JsonKey(name: 'reg_date') required this.regDate,
+      this.token});
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
@@ -137,10 +155,12 @@ class _$UserModelImpl with DiagnosticableTreeMixin implements _UserModel {
   @override
   @JsonKey(name: 'reg_date')
   final String regDate;
+  @override
+  final String? token;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserModel(email: $email, name: $name, regDate: $regDate)';
+    return 'UserModel(email: $email, name: $name, regDate: $regDate, token: $token)';
   }
 
   @override
@@ -150,7 +170,8 @@ class _$UserModelImpl with DiagnosticableTreeMixin implements _UserModel {
       ..add(DiagnosticsProperty('type', 'UserModel'))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('regDate', regDate));
+      ..add(DiagnosticsProperty('regDate', regDate))
+      ..add(DiagnosticsProperty('token', token));
   }
 
   @override
@@ -160,12 +181,13 @@ class _$UserModelImpl with DiagnosticableTreeMixin implements _UserModel {
             other is _$UserModelImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.regDate, regDate) || other.regDate == regDate));
+            (identical(other.regDate, regDate) || other.regDate == regDate) &&
+            (identical(other.token, token) || other.token == token));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, email, name, regDate);
+  int get hashCode => Object.hash(runtimeType, email, name, regDate, token);
 
   @JsonKey(ignore: true)
   @override
@@ -183,10 +205,10 @@ class _$UserModelImpl with DiagnosticableTreeMixin implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
-          {required final String email,
-          final String? name,
-          @JsonKey(name: 'reg_date') required final String regDate}) =
-      _$UserModelImpl;
+      {required final String email,
+      final String? name,
+      @JsonKey(name: 'reg_date') required final String regDate,
+      final String? token}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
@@ -198,6 +220,8 @@ abstract class _UserModel implements UserModel {
   @override
   @JsonKey(name: 'reg_date')
   String get regDate;
+  @override
+  String? get token;
   @override
   @JsonKey(ignore: true)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>

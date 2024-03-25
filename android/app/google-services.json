@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "650311142494",
+    "project_id": "taesung-25dc0",
+    "storage_bucket": "taesung-25dc0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650311142494:android:c30b03be15ad052fbb78cf",
+        "android_client_info": {
+          "package_name": "com.example.taesung_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRCz89GZuVTc7wOrRNxoz9v-tYTMdTBoQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,7 +13,6 @@ class DeviceInfo extends _$DeviceInfo {
 
   Future<List<DeviceInfoModel>> getDeviceInfo() async {
     final response = await ref.watch(publicDioProvider).get('/info');
-    print('response: ${response.data}');
     return [for (final json in response.data) DeviceInfoModel.fromJson(json)];
   }
 

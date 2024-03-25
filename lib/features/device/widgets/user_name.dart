@@ -17,7 +17,17 @@ class UserName extends ConsumerWidget {
           fontWeight: FontWeight.w600,
         ),
       ),
-      error: (e, st) => Text('Error: $e'),
+      error: (e, st) => Row(
+        children: [
+          const Text('이름을 불러오는데 실패했습니다.'),
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () {
+              ref.invalidate(userProvider);
+            },
+          )
+        ],
+      ),
       loading: () => const Text('...'),
     );
   }

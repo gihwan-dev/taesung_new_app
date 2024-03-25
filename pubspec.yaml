@@ -9,6 +9,8 @@ environment:
 dependencies:
   cupertino_icons: ^1.0.6
   dio: ^5.4.1
+  firebase_core: ^2.27.1
+  firebase_messaging: ^14.7.20
   fl_chart: ^0.66.2
   flutter:
     sdk: flutter

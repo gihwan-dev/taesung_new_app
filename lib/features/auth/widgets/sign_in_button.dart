@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taesung_app/consts/color_const.dart';
@@ -31,6 +32,8 @@ class _SignInButtonState extends ConsumerState<SignInButton> {
         ),
         onPressed: () async {
           await ref.read(authProvider.notifier).signIn();
+          // final fcmToken = await FirebaseMessaging.instance.getToken();
+          // TODO: 토큰 서버로 보내서 저장하기.
         },
         child: const Text(
           '로그인',
