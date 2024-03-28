@@ -31,9 +31,16 @@ class _SignInButtonState extends ConsumerState<SignInButton> {
           ),
         ),
         onPressed: () async {
-          await ref.read(authProvider.notifier).signIn();
-          // final fcmToken = await FirebaseMessaging.instance.getToken();
-          // TODO: 토큰 서버로 보내서 저장하기.
+          final permission =
+              await FirebaseMessaging.instance.requestPermission();
+          String? fcmToken;
+
+          if (permission.authorizationStatus ==
+              AuthorizationStatus.authorized) {
+            fcmToken = await FirebaseMessaging.instance.getToken();
+          }
+
+          await ref.read(authProvider.notifier).signIn(fcmToken);
         },
         child: const Text(
           '로그인',

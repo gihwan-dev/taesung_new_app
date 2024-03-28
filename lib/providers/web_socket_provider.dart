@@ -10,7 +10,7 @@ IO.Socket webSocket<String>(WebSocketRef ref, String namespace) {
   });
   print('webSocketProvider($namespace) create');
   final io = IO.io(
-    'http://localhost:3000/$namespace',
+    'http://172.30.1.100:3000/$namespace',
     IO.OptionBuilder()
         .disableAutoConnect()
         .setTransports(['websocket']).build(),

@@ -1,3 +1,5 @@
+import 'package:app_settings/app_settings.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taesung_app/features/setting/features/alarm/widgets/notification_setting_title.dart';
@@ -30,19 +32,110 @@ class NotificationSettingContainer extends ConsumerWidget {
             ),
             child: ListView(
               children: [
-                ..._buildSwitchList(notificationSetting),
-                const SizedBox(height: 20),
                 ref.watch(userProvider).when(
                       data: (user) => user.token == null
-                          ? FilledButton(
+                          ? const Text('알림을 받으려면 알림 허용을 해주세요.')
+                          : Column(
+                              children: _buildSwitchList(notificationSetting),
+                            ),
+                      error: (err, st) => Column(
+                        children: [
+                          const Text('오류가 발생했습니다. 다시 시도해 주세요.'),
+                          ElevatedButton(
                               onPressed: () {
-                                // TODO: 알림 허용 로직 작성
+                                ref.invalidate(notificationSettingProvider(
+                                    diIdx: selectedDeviceInfo.diIdx));
+                                ref.invalidate(userProvider);
+                              },
+                              child: const Text('새로고침')),
+                        ],
+                      ),
+                      loading: () => const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                const SizedBox(height: 20),
+                ref.watch(userProvider).when(
+                      skipLoadingOnReload: true,
+                      data: (user) => user.token == null
+                          ? FilledButton(
+                              onPressed: () async {
+                                final permission = await FirebaseMessaging
+                                    .instance
+                                    .requestPermission(
+                                  provisional: true,
+                                );
+                                print(
+                                    'permission is: ${permission.authorizationStatus}');
+                                if (permission.authorizationStatus ==
+                                    AuthorizationStatus.authorized) {
+                                  final fcmToken = await FirebaseMessaging
+                                      .instance
+                                      .getToken();
+                                  final result = await ref
+                                      .read(userProvider.notifier)
+                                      .createFcmToken(fcmToken);
+
+                                  ref.invalidate(userProvider);
+                                  if (context.mounted) {
+                                    if (result) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text('알림 허용이 완료되었습니다.'),
+                                        ),
+                                      );
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              '알림 허용에 실패했습니다. 다시 시도해 주세요.'),
+                                        ),
+                                      );
+                                    }
+                                  }
+                                } else {
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: const Text(
+                                            '알림 허용이 거부되었습니다. 앱 설정에서 알림을 허용해주세요.'),
+                                        action: SnackBarAction(
+                                            label: '설정으로 이동',
+                                            onPressed: () async {
+                                              await AppSettings
+                                                  .openAppSettings();
+                                            }),
+                                      ),
+                                    );
+                                  }
+                                }
                               },
                               child: const Text('알림 허용'),
                             )
                           : FilledButton(
-                              onPressed: () {
-                                // TODO: 알림 끄기 로직 작성
+                              onPressed: () async {
+                                final result = await ref
+                                    .read(userProvider.notifier)
+                                    .deleteFcmToken();
+                                ref.invalidate(userProvider);
+                                if (context.mounted) {
+                                  if (result) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('알림 끄기가 완료되었습니다.'),
+                                      ),
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content:
+                                            Text('알림 끄기에 실패했습니다. 다시 시도해 주세요.'),
+                                      ),
+                                    );
+                                  }
+                                }
                               },
                               child: const Text('알림 끄기'),
                             ),

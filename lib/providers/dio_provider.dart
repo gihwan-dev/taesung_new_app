@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'dio_provider.g.dart';
 
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'http://172.30.1.100:3000';
 
 @riverpod
 Dio publicDio(PublicDioRef ref) {

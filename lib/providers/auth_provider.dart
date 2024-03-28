@@ -69,16 +69,15 @@ class Auth extends _$Auth {
       RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
           .hasMatch(state.value!.email);
 
-  Future<void> signIn() async {
+  Future<void> signIn(String? fcmToken) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       try {
         if (!signInIsValid()) {
           throw '유효하지 않은 입력 양식 입니다. 이메일 또는 패스워드를 확인해 주세요.';
         }
-        final response = await ref
-            .read(publicDioProvider)
-            .post('/auth', data: state.value!.toJson());
+        final response = await ref.read(publicDioProvider).post('/auth',
+            data: state.value!.toJson()..addAll({'fcmToken': fcmToken}));
         if (response.statusCode == 201) {
           await ref
               .read(tokenProvider.notifier)
