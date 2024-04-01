@@ -40,9 +40,9 @@ class User extends _$User {
         isSuccess = true;
       }
     } on DioException catch (e) {
-      throw e.response?.data['message'] ?? "네트워크 오류가 발생했습니다. 다시 시도해주세요.";
+      print(e);
     } catch (e) {
-      rethrow;
+      print(e);
     }
 
     return isSuccess;
@@ -68,9 +68,9 @@ class User extends _$User {
         isSuccess = true;
       }
     } on DioException catch (e) {
-      throw e.response?.data['message'] ?? "네트워크 오류가 발생했습니다. 다시 시도해주세요.";
+      print(e);
     } catch (e) {
-      rethrow;
+      print(e);
     }
 
     return isSuccess;

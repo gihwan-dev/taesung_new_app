@@ -34,13 +34,20 @@ class _AccountSettingPageState extends ConsumerState<AccountSettingPage> {
           ),
         ),
       ),
-      error: (err, st) => Column(
-        children: [
-          Text(
-            'Error: $err',
-            style: const TextStyle(color: Colors.red),
+      error: (err, st) => Scaffold(
+        appBar: AppBar(
+          title: const Text('계정'),
+        ),
+        body: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('에러가 발생했습니다. 로그아웃 후 다시시도해 주세요.'),
+              SizedBox(height: 20),
+              SettingSignOutButton(),
+            ],
           ),
-        ],
+        ),
       ),
       loading: () => const Center(
         child: CircularProgressIndicator(),

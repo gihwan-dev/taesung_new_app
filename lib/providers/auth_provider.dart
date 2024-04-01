@@ -79,9 +79,7 @@ class Auth extends _$Auth {
         final response = await ref.read(publicDioProvider).post('/auth',
             data: state.value!.toJson()..addAll({'fcmToken': fcmToken}));
         if (response.statusCode == 201) {
-          await ref
-              .read(tokenProvider.notifier)
-              .save(response.data['access_token']);
+          ref.read(tokenProvider.notifier).save(response.data['access_token']);
           return Future(() => AuthModel.empty());
         }
         throw "로그인에 실패했습니다. 다시 시도해 주세요.";

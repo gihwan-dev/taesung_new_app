@@ -29,7 +29,7 @@ class SignUpSuccessScreen extends ConsumerWidget {
               ElevatedButton(
                 onPressed: () {
                   ref.read(authProvider.notifier).reset();
-                  context.go('/signIn');
+                  context.go('/');
                 },
                 child: const Text(
                   '로그인 하기',

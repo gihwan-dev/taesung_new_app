@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:taesung_app/consts/api.dart';
 
 part 'dio_provider.g.dart';
-
-const baseUrl = 'http://172.30.1.100:3000';
 
 @riverpod
 Dio publicDio(PublicDioRef ref) {

@@ -14,9 +14,11 @@ class Token extends _$Token {
   }
 
   Future<void> save(String token) async {
+    state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       await _flutterSecureStorage.write(key: 'token', value: token);
-      return _flutterSecureStorage.read(key: 'token');
+      print('token is: $token');
+      return await _flutterSecureStorage.read(key: 'token');
     });
   }
 

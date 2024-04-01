@@ -6,6 +6,7 @@ import 'package:taesung_app/consts/color_const.dart';
 import 'package:taesung_app/firebase_options.dart';
 import 'package:taesung_app/providers/router_provider.dart';
 
+// 백그라운드에서 받아오는 메시지를 처리하는 핸들러
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -16,10 +17,14 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 Future<void> main() async {
+  // WidgetsFlutterBinding.ensureInitialized()를 호출하여 앱이 실행되기 전에
+  // Firebase 초기화를 완료하도록 합니다.
   WidgetsFlutterBinding.ensureInitialized();
 
+  // 백그라운드에서 받아오는 메시지를 처리하는 핸들러를 등록합니다.
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
+  // Firebase 초기화를 완료합니다.
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
