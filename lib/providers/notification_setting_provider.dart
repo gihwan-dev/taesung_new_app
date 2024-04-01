@@ -21,8 +21,10 @@ class NotificationSetting extends _$NotificationSetting {
 
   Future<NotificationSettingModel> getNotificationSetting(
       {required int diIdx}) async {
-    final response =
-        await ref.watch(publicDioProvider).get('/notification-setting/$diIdx');
+    final token = ref.watch(tokenProvider).value!;
+    final response = await ref
+        .watch(privateDioProvider(token))
+        .get('/notification-setting/$diIdx');
     return NotificationSettingModel.fromJson(response.data);
   }
 

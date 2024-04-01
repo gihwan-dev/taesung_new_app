@@ -6,7 +6,7 @@ part of 'web_socket_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$webSocketHash() => r'45f809e24a129bb3f6a628505a6337b319654d72';
+String _$webSocketHash() => r'd6fce01b5b4e5fe39028c1bf98cbbf419d41ee49';
 
 /// Copied from Dart SDK
 class _SystemHash {

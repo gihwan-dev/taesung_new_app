@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:taesung_app/consts/api.dart';
 
 part 'web_socket_provider.g.dart';
 
@@ -10,7 +11,7 @@ IO.Socket webSocket<String>(WebSocketRef ref, String namespace) {
   });
   print('webSocketProvider($namespace) create');
   final io = IO.io(
-    'http://localhost:3000/$namespace',
+    '$baseUrl/$namespace',
     IO.OptionBuilder()
         .disableAutoConnect()
         .setTransports(['websocket']).build(),

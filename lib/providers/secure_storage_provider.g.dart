@@ -6,7 +6,7 @@ part of 'secure_storage_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tokenHash() => r'a5d199322ed5fb7d1c4540317b90180cce406467';
+String _$tokenHash() => r'7bbcade4cf82d20a9ed5a881fbd4461018b1c438';
 
 /// See also [Token].
 @ProviderFor(Token)

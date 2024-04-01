@@ -17,7 +17,8 @@ class Token extends _$Token {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       await _flutterSecureStorage.write(key: 'token', value: token);
-      return _flutterSecureStorage.read(key: 'token');
+      print('token is: $token');
+      return await _flutterSecureStorage.read(key: 'token');
     });
   }
 

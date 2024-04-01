@@ -17,6 +17,7 @@ class DevicePage extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const DeviceSelectMenu(),
+          centerTitle: true,
           bottom: _buildTabBar(),
         ),
         body: const TabBarView(

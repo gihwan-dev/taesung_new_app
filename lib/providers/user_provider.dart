@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:taesung_app/models/user_model.dart';
 import 'package:taesung_app/providers/dio_provider.dart';
@@ -20,5 +21,58 @@ class User extends _$User {
 
     print('user response: ${response.data}');
     return UserModel.fromJson(response.data);
+  }
+
+  Future<bool> deleteFcmToken() async {
+    bool isSuccess = false;
+
+    try {
+      final token = ref.watch(tokenProvider).value;
+
+      if (token == null) {
+        return isSuccess;
+      }
+
+      final response =
+          await ref.read(privateDioProvider(token)).delete('/token');
+
+      if (response.statusCode == 200) {
+        isSuccess = true;
+      }
+    } on DioException catch (e) {
+      print(e);
+    } catch (e) {
+      print(e);
+    }
+
+    return isSuccess;
+  }
+
+  Future<bool> createFcmToken(String? fcmToken) async {
+    bool isSuccess = false;
+
+    try {
+      final token = ref.watch(tokenProvider).value;
+
+      if (token == null) {
+        return isSuccess;
+      }
+      final response =
+          await ref.read(privateDioProvider(token)).post('/token', data: {
+        'token': fcmToken,
+      });
+
+      print(response.statusCode);
+
+      if (response.statusCode == 201) {
+        isSuccess = true;
+      }
+    } on DioException catch (e) {
+      print(e);
+    } catch (e) {
+      print(e);
+    }
+
+    return isSuccess;
   }
 }
