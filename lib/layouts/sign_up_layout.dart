@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:taesung_app/models/auth_model.dart';
 import 'package:taesung_app/features/auth/sign_up_screen.dart';
 import 'package:taesung_app/features/auth/sign_up_success_screen.dart';
+import 'package:taesung_app/models/auth_model.dart';
 import 'package:taesung_app/providers/auth_provider.dart';
 import 'package:taesung_app/widgets/logo.dart';
 
-class SignUpPage extends ConsumerStatefulWidget {
-  const SignUpPage({super.key});
+class SignUpLayout extends ConsumerStatefulWidget {
+  const SignUpLayout({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpLayoutState();
 }
 
-class _SignUpPageState extends ConsumerState<SignUpPage> {
+class _SignUpLayoutState extends ConsumerState<SignUpLayout> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
