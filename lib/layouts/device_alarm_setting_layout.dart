@@ -25,27 +25,32 @@ class _DeviceAlarmSettingLayoutState
     final alarmSettingState =
         ref.watch(alarmSettingProvider(diIdx: selectedDeviceInfo.diIdx));
 
-    return alarmSettingState.when(
-      data: (alarmSetting) => Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _buildOuSetField(alarmSetting),
-            _buildBatSetField(alarmSetting, context),
-            _buildButtonField(context,
-                diIdx: selectedDeviceInfo.diIdx, asIdx: alarmSetting.asIdx),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('알람 설정'),
       ),
-      error: (err, st) => Text(
-        'Error: $err',
-        style: const TextStyle(color: Colors.red),
+      body: alarmSettingState.when(
+        data: (alarmSetting) => Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _buildOuSetField(alarmSetting),
+              _buildBatSetField(alarmSetting, context),
+              _buildButtonField(context,
+                  diIdx: selectedDeviceInfo.diIdx, asIdx: alarmSetting.asIdx),
+            ],
+          ),
+        ),
+        error: (err, st) => Text(
+          'Error: $err',
+          style: const TextStyle(color: Colors.red),
+        ),
+        loading: () => const CircularProgressIndicator(),
       ),
-      loading: () => const CircularProgressIndicator(),
     );
   }
 

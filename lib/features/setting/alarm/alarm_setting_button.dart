@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taesung_app/consts/color_const.dart';
-import 'package:taesung_app/features/setting/features/alarm/widgets/alarm_setting_btn_title_container.dart';
+import 'package:taesung_app/features/setting/alarm/alarm_setting_btn_title_container.dart';
 import 'package:taesung_app/models/device_info_model.dart';
 import 'package:taesung_app/providers/router_provider.dart';
 

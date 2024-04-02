@@ -5,14 +5,14 @@ import 'package:taesung_app/providers/auth_provider.dart';
 import 'package:taesung_app/widgets/auth_navigator_buttons.dart';
 import 'package:taesung_app/widgets/logo.dart';
 
-class SignInPage extends ConsumerStatefulWidget {
-  const SignInPage({super.key});
+class SignInLayout extends ConsumerStatefulWidget {
+  const SignInLayout({super.key});
 
   @override
-  ConsumerState<SignInPage> createState() => _SignInPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignInLayoutState();
 }
 
-class _SignInPageState extends ConsumerState<SignInPage> {
+class _SignInLayoutState extends ConsumerState<SignInLayout> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
@@ -68,32 +68,30 @@ class _SignInPageState extends ConsumerState<SignInPage> {
           ),
         ),
       ),
-      error: (err, st) {
-        return Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Logo(),
-                const SizedBox(height: 50),
-                Text(
-                  'Error: ${err.toString()}',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.red),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    ref.invalidate(authProvider);
-                  },
-                  child: const Text('새로고침'),
-                ),
-              ],
-            ),
+      error: (err, st) => Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Logo(),
+              const SizedBox(height: 50),
+              Text(
+                'Error: ${err.toString()}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.red),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  ref.invalidate(authProvider);
+                },
+                child: const Text('새로고침'),
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
       loading: () => const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:taesung_app/features/setting/widgets/setting_navigation_button.dart';
 
-class SettingLayout extends StatelessWidget {
-  const SettingLayout({super.key});
+class HomeSettingLayout extends StatelessWidget {
+  const HomeSettingLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
