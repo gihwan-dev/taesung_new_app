@@ -13,24 +13,18 @@ class DeviceState extends _$DeviceState {
   @override
   DeviceStateModel build(int diIdx) {
     ref.onDispose(() {
-      print('deviceState onDispose $diIdx');
       ref
           .watch(webSocketProvider(_deviceStateNameSpace))
           .off(_deviceStateNameSpace);
     });
 
-    ref.watch(webSocketProvider(_deviceStateNameSpace)).onConnect((data) {
-      print('deviceState webSocket connected $diIdx');
-    });
+    ref.watch(webSocketProvider(_deviceStateNameSpace)).onConnect((data) {});
 
     emitFindOneDeviceState(diIdx);
 
-    ref
-        .watch(webSocketProvider(_deviceStateNameSpace))
-        .onDisconnect((data) => print('deviceState webSocket disconnected'));
+    ref.watch(webSocketProvider(_deviceStateNameSpace)).onDisconnect((data) {});
 
     ref.watch(webSocketProvider(_deviceStateNameSpace)).onError((error) {
-      print('deviceState webSocket error: $error');
       state = state.copyWith(hasError: true);
     });
 
@@ -46,7 +40,6 @@ class DeviceState extends _$DeviceState {
       if (data == null) {
         return;
       } else {
-        print('deviceState findOneDeviceState: $data');
         if (data['di_idx'] != state.diIdx) return;
         state = DeviceStateModel.fromJson(data)
             .copyWith(emitStatus: DeviceEmitStatus.isSuccess);

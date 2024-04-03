@@ -12,15 +12,12 @@ class Weather extends _$Weather {
   @override
   WeatherModel build(int diIdx) {
     ref.onDispose(() {
-      print('weatherProvider onDispose $diIdx');
       ref.watch(webSocketProvider(_nameSpace)).off(_nameSpace);
     });
 
     listenEvent();
 
-    ref.watch(webSocketProvider(_nameSpace)).onConnect((_) {
-      print('weather webSocket connected $diIdx');
-    });
+    ref.watch(webSocketProvider(_nameSpace)).onConnect((_) {});
 
     emitEvent(diIdx);
 
@@ -32,13 +29,11 @@ class Weather extends _$Weather {
   }
 
   void emitEvent(int diIdx) {
-    print('weather emitEvent diIdx: $diIdx');
     ref.watch(webSocketProvider(_nameSpace)).emit(_eventName, diIdx);
   }
 
   void listenEvent() {
     ref.watch(webSocketProvider(_nameSpace)).on(_eventName, (weatherData) {
-      print('weatherData: $weatherData');
       if (weatherData == null) {
         return;
       }

@@ -13,7 +13,6 @@ class SensorData extends _$SensorData {
   @override
   SensorDataModel build(int diIdx) {
     ref.onDispose(() {
-      print('sensorData onDispose $diIdx');
       ref
           .watch(webSocketProvider(_sensorDataNameSpace))
           .off(_sensorDataNameSpace);
@@ -23,9 +22,7 @@ class SensorData extends _$SensorData {
 
     emitFindOneSensorData(diIdx);
 
-    ref.watch(webSocketProvider(_sensorDataNameSpace)).onConnect((data) {
-      print('sensorData webSocket connected $diIdx');
-    });
+    ref.watch(webSocketProvider(_sensorDataNameSpace)).onConnect((data) {});
     return SensorDataModel.empty().copyWith(diIdx: diIdx);
   }
 
@@ -35,7 +32,6 @@ class SensorData extends _$SensorData {
       if (data == null) {
         return;
       } else {
-        print('sensorData findOneSensorData: $data');
         if (data['di_idx'] != state.diIdx) return;
         state = SensorDataModel.fromJson(data);
       }
@@ -43,7 +39,6 @@ class SensorData extends _$SensorData {
   }
 
   void emitFindOneSensorData(int diIdx) {
-    print('sensorData emitFindOneSensorData diIdx: $diIdx');
     ref
         .watch(webSocketProvider(_sensorDataNameSpace))
         .emit(_sensorDataEventName, diIdx);

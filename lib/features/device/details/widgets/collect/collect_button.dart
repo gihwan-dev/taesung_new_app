@@ -16,6 +16,8 @@ class CollectButton extends ConsumerWidget {
     final deviceState = ref.watch(deviceStateProvider(deviceInfo.diIdx));
     final isCanCollect = deviceState.dsRemoteCollect == 1;
 
+    // collect가 1인경우 포집 대기인 상태이므로 시작 버튼을 통한 시작
+    // 이외의 경우 리셋 버튼이 표기되므로 리셋을 통한 초기화
     void handlerButtonClick({required int dsCollect}) {
       switch (dsCollect) {
         case 1:
@@ -41,12 +43,14 @@ class CollectButton extends ConsumerWidget {
         children: [
           Expanded(
             child: Center(
+              // 포집 가능 여부에 따른 텍스트 표시
               child: !isCanCollect
                   ? const Text('포집 불가')
                   : CollectStateText(dsCollect: deviceState.dsCollect),
             ),
           ),
           isCanCollect
+              // collect가 1인 경우 그리고 웹소켓 통신 상태가 로딩 상태가 아닌 경우 버튼 표시
               ? deviceState.emitStatus != DeviceEmitStatus.isLoading
                   ? Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -58,6 +62,7 @@ class CollectButton extends ConsumerWidget {
                             _buildButtonText(dsCollect: deviceState.dsCollect),
                       ),
                     )
+                  // 로딩중인 경우 로딩 상태 표시
                   : const Center(
                       child: CircularProgressIndicator(),
                     )

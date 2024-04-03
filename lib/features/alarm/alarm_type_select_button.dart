@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:taesung_app/providers/alarm_code_provider.dart';
+import 'package:taesung_app/widgets/error_content.dart';
 
 class AlarmTypeSelectButton extends ConsumerStatefulWidget {
   final int curValue;
@@ -37,14 +38,7 @@ class _AlarmTypeSelectButtonState extends ConsumerState<AlarmTypeSelectButton> {
         ],
         onChanged: (value) => widget.onChange(value),
       ),
-      error: (er, st) => Center(
-        child: Text(
-          er.toString(),
-          style: const TextStyle(
-            color: Colors.red,
-          ),
-        ),
-      ),
+      error: (er, st) => ErrorContent(provider: alarmCodeProvider),
       loading: () => const Text('_'),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taesung_app/features/setting/collect/auto_collect_item.dart';
 import 'package:taesung_app/providers/device_info_provider.dart';
+import 'package:taesung_app/widgets/error_content.dart';
 
 class CollectSettingLayout extends ConsumerWidget {
   const CollectSettingLayout({super.key});
@@ -22,22 +23,7 @@ class CollectSettingLayout extends ConsumerWidget {
             ],
           );
         },
-        error: (err, st) => Center(
-          child: Column(
-            children: [
-              Text(
-                'Error: $err',
-                style: const TextStyle(color: Colors.red),
-              ),
-              TextButton(
-                onPressed: () {
-                  ref.invalidate(deviceInfoProvider);
-                },
-                child: const Text('다시 불러오기'),
-              )
-            ],
-          ),
-        ),
+        error: (err, st) => ErrorContent(provider: deviceInfoProvider),
         loading: () => const Center(child: CircularProgressIndicator()),
       ),
     );

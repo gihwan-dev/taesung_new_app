@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:taesung_app/models/device_info_model.dart';
+import 'package:taesung_app/providers/sensor_data_provider.dart';
 
 import 'package:taesung_app/providers/sensor_rest_provider.dart';
+import 'package:taesung_app/widgets/error_content.dart';
 
 const sensorColumns = [
   'mos',
@@ -62,13 +64,7 @@ class SensorDataTable extends ConsumerWidget {
           ),
         ),
       ),
-      error: (error, st) => Center(
-        child: Text(
-          error.toString(),
-          textAlign: TextAlign.center,
-          style: const TextStyle(color: Colors.red),
-        ),
-      ),
+      error: (error, st) => const ErrorContent(provider: sensorDataProvider),
       loading: () => const Center(
         child: CircularProgressIndicator(),
       ),

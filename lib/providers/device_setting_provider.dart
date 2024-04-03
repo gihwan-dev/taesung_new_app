@@ -15,7 +15,6 @@ class DeviceSetting extends _$DeviceSetting {
   Future<DeviceSettingModel?> getDeviceSetting({required int diIdx}) async {
     final response =
         await ref.watch(publicDioProvider).get('/device-setting/$diIdx');
-    print('get device setting response: $response');
     return response.data == ''
         ? null
         : DeviceSettingModel.fromJson(response.data);

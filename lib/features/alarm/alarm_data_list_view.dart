@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:taesung_app/providers/alarm_code_provider.dart';
 import 'package:taesung_app/providers/alarm_data_provider.dart';
 import 'package:taesung_app/providers/device_info_provider.dart';
+import 'package:taesung_app/widgets/error_content.dart';
 
 class AlarmDataListView extends ConsumerWidget {
   final int? diIdx;
@@ -49,12 +50,7 @@ class AlarmDataListView extends ConsumerWidget {
               separatorBuilder: (context, index) => const Divider(height: 10),
               itemCount: alarmDataList.length,
             ),
-            error: (err, st) => Text(
-              err.toString(),
-              style: const TextStyle(
-                color: Colors.red,
-              ),
-            ),
+            error: (err, st) => const ErrorContent(provider: alarmDataProvider),
             loading: () => Column(
               children: [
                 Container(
@@ -70,12 +66,7 @@ class AlarmDataListView extends ConsumerWidget {
           ),
         );
       },
-      error: (err, st) => Text(
-        err.toString(),
-        style: const TextStyle(
-          color: Colors.red,
-        ),
-      ),
+      error: (err, st) => ErrorContent(provider: deviceInfoProvider),
       loading: () => const Center(
         child: CircularProgressIndicator(),
       ),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taesung_app/pages/home_page.dart';
 import 'package:taesung_app/pages/sign_in_page.dart';
 import 'package:taesung_app/providers/secure_storage_provider.dart';
+import 'package:taesung_app/widgets/error_content.dart';
 
 class RootLayout extends ConsumerWidget {
   const RootLayout({super.key});
@@ -19,14 +20,7 @@ class RootLayout extends ConsumerWidget {
         }
       },
       error: (err, st) => Scaffold(
-        body: Column(
-          children: [
-            Text(
-              'Error: $err',
-              style: const TextStyle(color: Colors.red),
-            ),
-          ],
-        ),
+        body: ErrorContent(provider: tokenProvider),
       ),
       loading: () => const Scaffold(
         body: Center(

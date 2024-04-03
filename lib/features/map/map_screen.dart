@@ -5,6 +5,7 @@ import 'package:label_marker/label_marker.dart';
 import 'package:taesung_app/features/device/widgets/device_item.dart';
 import 'package:taesung_app/models/device_info_model.dart';
 import 'package:taesung_app/providers/device_info_provider.dart';
+import 'package:taesung_app/widgets/error_content.dart';
 
 class MapScreen extends ConsumerStatefulWidget {
   const MapScreen({super.key});
@@ -39,8 +40,11 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     GoogleMapController controller,
     List<DeviceInfoModel> deviceInfoList,
   ) async {
+    // 전달받은 controller를 mapController에 저장
     mapController = controller;
+    // 레이블 마커 생성
     await _setLabelMarkers(deviceInfoList);
+    // setState를 호출해서 UI를 다시 그려 마커를 표시
     setState(() {});
   }
 
@@ -76,9 +80,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
           )
         ],
       ),
-      error: (err, st) => Center(
-          child:
-              Text('Error: $err', style: const TextStyle(color: Colors.red))),
+      error: (err, st) => ErrorContent(provider: deviceInfoProvider),
       loading: () => const Center(child: CircularProgressIndicator()),
     );
   }
