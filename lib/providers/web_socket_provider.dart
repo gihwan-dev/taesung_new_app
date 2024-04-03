@@ -6,10 +6,7 @@ part 'web_socket_provider.g.dart';
 
 @riverpod
 IO.Socket webSocket<String>(WebSocketRef ref, String namespace) {
-  ref.onDispose(() {
-    print('webSocketProvider($namespace) dispose');
-  });
-  print('webSocketProvider($namespace) create');
+  ref.onDispose(() {});
   final io = IO.io(
     '$baseUrl/$namespace',
     IO.OptionBuilder()

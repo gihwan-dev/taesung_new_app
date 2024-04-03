@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:taesung_app/models/alarm_setting_model.dart';
+import 'package:taesung_app/features/setting/alarm/alarm_detail/alarm_detail_bat_edit_field.dart';
+import 'package:taesung_app/features/setting/alarm/alarm_detail/alarm_detail_form_button.dart';
+import 'package:taesung_app/features/setting/alarm/alarm_detail/alarm_detail_ou_edit_field.dart';
 import 'package:taesung_app/models/device_info_model.dart';
 import 'package:taesung_app/providers/alarm_setting_provider.dart';
+import 'package:taesung_app/widgets/error_content.dart';
 
 class DeviceAlarmSettingLayout extends ConsumerStatefulWidget {
   const DeviceAlarmSettingLayout({super.key});
@@ -30,6 +33,7 @@ class _DeviceAlarmSettingLayoutState
         title: const Text('알람 설정'),
       ),
       body: alarmSettingState.when(
+        skipLoadingOnReload: true,
         data: (alarmSetting) => Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
@@ -38,149 +42,39 @@ class _DeviceAlarmSettingLayoutState
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _buildOuSetField(alarmSetting),
-              _buildBatSetField(alarmSetting, context),
-              _buildButtonField(context,
-                  diIdx: selectedDeviceInfo.diIdx, asIdx: alarmSetting.asIdx),
+              AlarmDetailOuEditField(
+                controller: _controller,
+                title: _buildTitleText("복합악취"),
+                alarmSetting: alarmSetting,
+                onChanged: (value) => setState(
+                  () {
+                    ouValue = value;
+                  },
+                ),
+                ouValue: ouValue,
+              ),
+              AlarmDetailBatEditField(
+                title: _buildTitleText("배터리"),
+                onChanged: (value) => setState(
+                  () {
+                    batValue = value.toStringAsFixed(0);
+                  },
+                ),
+                alarmSetting: alarmSetting,
+                batValue: batValue,
+              ),
+              AlarmDetailFormButton(
+                diIdx: selectedDeviceInfo.diIdx,
+                asIdx: alarmSetting.asIdx,
+                ouValue: ouValue,
+                batValue: batValue,
+              ),
             ],
           ),
         ),
-        error: (err, st) => Text(
-          'Error: $err',
-          style: const TextStyle(color: Colors.red),
-        ),
+        error: (err, st) => const ErrorContent(provider: alarmSettingProvider),
         loading: () => const CircularProgressIndicator(),
       ),
-    );
-  }
-
-  Row _buildButtonField(
-    BuildContext context, {
-    required int diIdx,
-    required int asIdx,
-  }) {
-    return Row(
-      children: [
-        Expanded(
-          child: ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                Colors.grey[200],
-              ),
-            ),
-            onPressed: () {
-              context.pop();
-            },
-            child: const Text(
-              '취소',
-              style: TextStyle(
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 10),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () async {
-              await ref
-                  .read(alarmSettingProvider(diIdx: diIdx).notifier)
-                  .updateAlarmSetting(
-                      asIdx: asIdx,
-                      ouValue: ouValue == null ? null : int.parse(ouValue!),
-                      batValue: batValue == null ? null : int.parse(batValue!));
-              if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('저장되었습니다.'),
-                  ),
-                );
-              }
-            },
-            child: const Text(
-              '저장',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Column _buildBatSetField(
-      AlarmSettingModel alarmSetting, BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildTitleText('배터리'),
-        const SizedBox(height: 15),
-        Text(
-          '${batValue ?? alarmSetting.asBatSet.toString()}%',
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 10),
-        Slider(
-          value: double.parse(batValue ?? alarmSetting.asBatSet.toString()),
-          onChanged: (value) {
-            setState(() {
-              batValue = value.toStringAsFixed(0);
-            });
-          },
-          min: 0,
-          max: 100,
-          divisions: 20,
-          label: batValue ?? alarmSetting.asBatSet.toString(),
-        ),
-        const SizedBox(height: 100),
-      ],
-    );
-  }
-
-  Column _buildOuSetField(AlarmSettingModel alarmSetting) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildTitleText('복합 악취'),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            SizedBox(
-              width: 100,
-              child: TextField(
-                controller: _controller
-                  ..text = ouValue ?? alarmSetting.asOuSet.toString(),
-                onChanged: (value) {
-                  setState(() {
-                    ouValue = value;
-                  });
-                },
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            const Text(
-              'Ou',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ],
     );
   }
 

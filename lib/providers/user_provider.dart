@@ -19,7 +19,6 @@ class User extends _$User {
     final response =
         await ref.read(privateDioProvider(token.value!)).get('/user');
 
-    print('user response: ${response.data}');
     return UserModel.fromJson(response.data);
   }
 
@@ -39,11 +38,8 @@ class User extends _$User {
       if (response.statusCode == 200) {
         isSuccess = true;
       }
-    } on DioException catch (e) {
-      print(e);
-    } catch (e) {
-      print(e);
-    }
+    } on DioException catch (_) {
+    } catch (_) {}
 
     return isSuccess;
   }
@@ -62,16 +58,11 @@ class User extends _$User {
         'token': fcmToken,
       });
 
-      print(response.statusCode);
-
       if (response.statusCode == 201) {
         isSuccess = true;
       }
-    } on DioException catch (e) {
-      print(e);
-    } catch (e) {
-      print(e);
-    }
+    } on DioException catch (_) {
+    } catch (_) {}
 
     return isSuccess;
   }

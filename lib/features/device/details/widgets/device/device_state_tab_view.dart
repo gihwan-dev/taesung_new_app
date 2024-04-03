@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:taesung_app/features/device/details/widgets/device/device_state_matrix_row.dart';
+
 import 'package:taesung_app/features/device/utils/icon_utils.dart';
 import 'package:taesung_app/models/device_info_model.dart';
 import 'package:taesung_app/providers/device_state_provider.dart';
+
+const columnList = [
+  '모델명',
+  '배터리',
+  '수신날짜',
+  '문열림 상태',
+];
 
 class DeviceStateTabView extends ConsumerWidget {
   const DeviceStateTabView({super.key});
@@ -17,39 +26,22 @@ class DeviceStateTabView extends ConsumerWidget {
       children: [
         const Row(),
         const SizedBox(height: 30),
-        _buildStateRow('모델명', _buildStateValueText(curDeviceInfo.diName)),
+        DeviceStateMatrixRow(
+            title: "모델명", value: _buildStateValueText(curDeviceInfo.diName)),
         _buildDivider(),
-        _buildStateRow(
-          '배터리',
-          _buildStateValueTextWithIcon(bat: deviceState.dsBat),
-        ),
+        DeviceStateMatrixRow(
+            title: "배터리",
+            value: _buildStateValueTextWithIcon(bat: deviceState.dsBat)),
         _buildDivider(),
-        _buildStateRow('수신날짜', _buildStateValueText(deviceState.modeDate)),
+        DeviceStateMatrixRow(
+            title: "수신날짜", value: _buildStateValueText(deviceState.modeDate)),
         _buildDivider(),
-        _buildStateRow(
-          '문열림 상태',
-          _buildStateValueText(deviceState.dsDoor == 1 ? "문열림" : "문닫힘"),
-        ),
+        DeviceStateMatrixRow(
+            title: "문열림 상태",
+            value:
+                _buildStateValueText(deviceState.dsDoor == 1 ? "문열림" : "문닫힘")),
         _buildDivider(),
       ],
-    );
-  }
-
-  SizedBox _buildStateRow(String title, Widget value) {
-    return SizedBox(
-      width: 300,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          value,
-        ],
-      ),
     );
   }
 

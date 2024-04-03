@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import 'package:taesung_app/models/device_info_model.dart';
 import 'package:taesung_app/providers/weather_rest_provider.dart';
+import 'package:taesung_app/widgets/error_content.dart';
 
 const weatherColumns = [
   '온도',
@@ -69,13 +70,7 @@ class WeatherDataTable extends ConsumerWidget {
           ),
         ),
       ),
-      error: (error, st) => Center(
-        child: Text(
-          error.toString(),
-          textAlign: TextAlign.center,
-          style: const TextStyle(color: Colors.red),
-        ),
-      ),
+      error: (error, st) => const ErrorContent(provider: weatherRestProvider),
       loading: () => const Center(
         child: CircularProgressIndicator(),
       ),

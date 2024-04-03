@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:taesung_app/providers/device_info_provider.dart';
+import 'package:taesung_app/widgets/error_content.dart';
 
 class DeviceSelectButton extends ConsumerStatefulWidget {
   final int? curValue;
@@ -35,12 +36,7 @@ class _DeviceSelectButtonState extends ConsumerState<DeviceSelectButton> {
           onChanged: (value) => widget.onChange(value),
         );
       },
-      error: (er, st) => Text(
-        er.toString(),
-        style: const TextStyle(
-          color: Colors.red,
-        ),
-      ),
+      error: (er, st) => ErrorContent(provider: deviceInfoProvider),
       loading: () => const Text('_'),
     );
   }

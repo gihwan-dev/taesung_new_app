@@ -4,6 +4,7 @@ import 'package:taesung_app/features/auth/sign_up_screen.dart';
 import 'package:taesung_app/features/auth/sign_up_success_screen.dart';
 import 'package:taesung_app/models/auth_model.dart';
 import 'package:taesung_app/providers/auth_provider.dart';
+import 'package:taesung_app/widgets/error_content.dart';
 import 'package:taesung_app/widgets/logo.dart';
 
 class SignUpLayout extends ConsumerStatefulWidget {
@@ -19,6 +20,7 @@ class _SignUpLayoutState extends ConsumerState<SignUpLayout> {
     final authState = ref.watch(authProvider);
     return authState.when(
       data: (auth) => switch (auth.signUpStatus) {
+        // 회원가입 성공시 회원가입 성공 페이지로 이동
         SignUpStatus.success => const SignUpSuccessScreen(),
         _ => const SignUpScreen(),
       },
@@ -30,18 +32,7 @@ class _SignUpLayoutState extends ConsumerState<SignUpLayout> {
             children: [
               const Logo(),
               const SizedBox(height: 50),
-              Text(
-                'Error: ${err.toString()}',
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.red),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  ref.invalidate(authProvider);
-                },
-                child: const Text('새로고침'),
-              ),
+              ErrorContent(provider: authProvider),
             ],
           ),
         ),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taesung_app/features/auth/sign_in_button.dart';
 import 'package:taesung_app/providers/auth_provider.dart';
 import 'package:taesung_app/widgets/auth_navigator_buttons.dart';
+import 'package:taesung_app/widgets/error_content.dart';
 import 'package:taesung_app/widgets/logo.dart';
 
 class SignInLayout extends ConsumerStatefulWidget {
@@ -76,18 +77,7 @@ class _SignInLayoutState extends ConsumerState<SignInLayout> {
             children: [
               const Logo(),
               const SizedBox(height: 50),
-              Text(
-                'Error: ${err.toString()}',
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.red),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  ref.invalidate(authProvider);
-                },
-                child: const Text('새로고침'),
-              ),
+              ErrorContent(provider: authProvider),
             ],
           ),
         ),

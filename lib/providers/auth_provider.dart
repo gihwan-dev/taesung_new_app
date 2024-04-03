@@ -79,6 +79,9 @@ class Auth extends _$Auth {
         final response = await ref.read(publicDioProvider).post('/auth',
             data: state.value!.toJson()..addAll({'fcmToken': fcmToken}));
         if (response.statusCode == 201) {
+          // 토큰을 저장해서 토큰 프로바이더 상태 변경을 한 후 루트페이지에서 토큰 상태를 감지해서 홈 화면을
+          // 띄울 수 있게 합니다.
+          // 저장된 토큰을 통해 자동 로그인이 가능합니다.
           ref.read(tokenProvider.notifier).save(response.data['access_token']);
           return Future(() => AuthModel.empty());
         }

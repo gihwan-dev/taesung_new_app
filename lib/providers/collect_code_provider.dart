@@ -13,7 +13,6 @@ class CollectCode extends _$CollectCode {
 
   Future<List<CollectCodeModel>> getCollectCode() async {
     final response = await ref.watch(publicDioProvider).get('/collect-code');
-    print('collect code response: ${response.data}');
     return [
       for (final collectCode in response.data)
         CollectCodeModel.fromJson(collectCode)
@@ -29,6 +28,7 @@ class CollectCode extends _$CollectCode {
   }
 
   String getCollectCodeName(int ccIdx) {
+    // ccIdx에 해당하는 collectCode를 찾아서 ccName을 반환
     final collectCode = state.value?.firstWhere(
       (collectCode) => collectCode.ccIdx == ccIdx,
       orElse: () => CollectCodeModel.empty(),

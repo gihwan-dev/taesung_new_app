@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taesung_app/features/setting/widgets/setting_footer.dart';
 import 'package:taesung_app/features/setting/widgets/setting_navigation_button.dart';
 
 class HomeSettingLayout extends StatelessWidget {
@@ -25,15 +26,7 @@ class HomeSettingLayout extends StatelessWidget {
                 ],
               ),
             ),
-            const Center(
-              child: Text(
-                '태성 연구소 CS: 052-247-8691',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.grey,
-                ),
-              ),
-            )
+            const SettingFooter(),
           ],
         ),
       ),
