@@ -66,7 +66,9 @@ class CollectButton extends ConsumerWidget {
                   : const Center(
                       child: CircularProgressIndicator(),
                     )
+              // 포집이 가능하지 않은경우 빈 컨테이너 표시
               : const SizedBox(height: 10),
+          // 높이 조절용 박스
           const SizedBox(height: 15),
         ],
       ),

@@ -16,6 +16,7 @@ class DeviceOdorChart extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: PieChart(
+              // 반원 차트를 그리기 위한 설정
               PieChartData(
                 startDegreeOffset: 180,
                 sectionsSpace: 2,
@@ -25,6 +26,7 @@ class DeviceOdorChart extends StatelessWidget {
                   (index) {
                     if (index == 5) {
                       return PieChartSectionData(
+                        // 투명색을 적용해서 아래쪽 절반의 반원 데이터를 가렸습니다.
                         color: transparentColor,
                         value: 180,
                         radius: 40,

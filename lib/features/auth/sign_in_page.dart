@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taesung_app/features/auth/sign_in_button.dart';
+import 'package:taesung_app/features/auth/sign_in_error_screen.dart';
 import 'package:taesung_app/providers/auth_provider.dart';
 import 'package:taesung_app/widgets/auth_navigator_buttons.dart';
 import 'package:taesung_app/widgets/logo.dart';
@@ -69,30 +70,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
         ),
       ),
       error: (err, st) {
-        return Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Logo(),
-                const SizedBox(height: 50),
-                Text(
-                  'Error: ${err.toString()}',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.red),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    ref.invalidate(authProvider);
-                  },
-                  child: const Text('새로고침'),
-                ),
-              ],
-            ),
-          ),
-        );
+        return SignInErrorScreen(err: err.toString());
       },
       loading: () => const Scaffold(
         body: Center(
