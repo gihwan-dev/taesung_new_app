@@ -13,6 +13,7 @@ class ErrorContent extends ConsumerWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        const Row(),
         const Text(
           '에러가 발생했습니다. 다시 시도해주세요.',
           style: TextStyle(color: Colors.red),

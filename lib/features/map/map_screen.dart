@@ -52,6 +52,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
   Widget build(BuildContext context) {
     final deviceInfoState = ref.watch(deviceInfoProvider);
 
+    // curSelectedDeviceInfo가 null이면 deviceInfoState의 첫 번째 요소를 할당
     curSelectedDeviceInfo ??= deviceInfoState.value?[0];
 
     return deviceInfoState.when(
